@@ -2,6 +2,8 @@
 #include "CSnake.h"
 
 
+// The original length of the snake should be 3
+// This should be fixed later on
 Snake::Snake()
 {
 	CPoint point;
