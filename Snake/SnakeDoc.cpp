@@ -42,28 +42,35 @@ END_MESSAGE_MAP()
 CSnakeDoc::CSnakeDoc()
 {
 	// Define the light theme
-	light.bg.CreateSolidBrush(RGB(40, 160, 40));
+	// game rect 217/220/209
+	light.bg.CreateSolidBrush(RGB(184, 171, 165));
 	light.score.CreateSolidBrush(RGB(80, 46, 80));
-	light.food.CreateSolidBrush(RGB(252, 70, 60));
-	light.snake.CreateSolidBrush(RGB(40, 142, 228));
+	light.food.CreateSolidBrush(RGB(255, 237, 131));
+	light.snake.CreateSolidBrush(RGB(124, 243, 160));
+	light.m_bg = "LIGHT";
 
 	// Define the dark theme
-	dark.bg.CreateSolidBrush(RGB(40, 160, 40));
+	// game rect 40/28/45
+	dark.bg.CreateSolidBrush(RGB(105, 94, 147));
 	dark.score.CreateSolidBrush(RGB(80, 46, 80));
-	dark.food.CreateSolidBrush(RGB(38, 46, 49));
-	dark.snake.CreateSolidBrush(RGB(80, 46, 80));
+	dark.food.CreateSolidBrush(RGB(190, 175, 194));
+	dark.snake.CreateSolidBrush(RGB(129, 85, 186));
+	dark.m_bg = "DARK";
 
 	// Define the default theme
+	// Classic green background with blue snake and red food
+	// game rect 51/204/51
 	defalt.bg.CreateSolidBrush(RGB(40, 160, 40));
 	defalt.score.CreateSolidBrush(RGB(120, 160, 40));
 	defalt.food.CreateSolidBrush(RGB(255, 80, 80));
 	defalt.snake.CreateSolidBrush(RGB(51, 102, 255));
+	defalt.m_bg = "DEFAULT";
 
 	current = &defalt;
 
 	// Smaller means higher speed
-	speed_low = 150;
-	speed_default = 100;
+	speed_low = 250;
+	speed_default = 150;
 	speed_high = 50;
 	speed_current = &speed_default;
 
@@ -176,21 +183,18 @@ void CSnakeDoc::Dump(CDumpContext& dc) const
 void CSnakeDoc::OnThemeLight()
 {
 	current = &light;
-
 }
 
 
 void CSnakeDoc::OnThemeDark()
 {
 	current = &dark;
-
 }
 
 
 void CSnakeDoc::OnThemeDefault()
 {
 	current = &defalt;
-	
 }
 
 

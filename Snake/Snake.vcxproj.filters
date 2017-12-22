@@ -98,5 +98,11 @@
     <Image Include="res\background.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="res\background_dark.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\background_light.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

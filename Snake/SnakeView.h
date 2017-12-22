@@ -20,10 +20,6 @@ public:
 	CRect score_rect;
 	CRect food_rect;
 	CRect snake_rect;
-	CBrush bg_brush; // background color
-	CBrush score_brush; // score region color
-	CBrush food_brush; // food color
-	CBrush snake_brush; // snake color
 	CString score;
 	//CImage m_bg;
 	CBitmap m_bg;

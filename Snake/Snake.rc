@@ -366,6 +366,10 @@ IDB_SNAKE               BITMAP                  "res\\MySnake.bmp"
 
 IDB_BG                  BITMAP                  "res\\background.bmp"
 
+IDB_BG_DARK             BITMAP                  "res\\background_dark.bmp"
+
+IDB_BG_LIGHT            BITMAP                  "res\\background_light.bmp"
+
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////

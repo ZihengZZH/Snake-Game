@@ -20,6 +20,7 @@ public:
 		CBrush score;
 		CBrush food;
 		CBrush snake;
+		CString m_bg;
 	};
 	m_theme light;
 	m_theme dark;

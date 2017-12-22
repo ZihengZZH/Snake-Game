@@ -13,7 +13,8 @@
 #define IDB_PNG1                        317
 #define IDB_SNAKE                       318
 #define IDB_BG                          319
-#define ID_STARTGAME_START              322
+#define IDB_BG_DARK                     321
+#define IDB_BG_LIGHT                    322
 #define IDC_STATIC_ICON                 1000
 #define IDC_STATIC_INFO                 1001
 #define IDC_SYSLINK1                    1002
@@ -30,7 +31,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        321
+#define _APS_NEXT_RESOURCE_VALUE        323
 #define _APS_NEXT_COMMAND_VALUE         32785
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           310

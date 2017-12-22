@@ -40,11 +40,7 @@ CSnakeView::~CSnakeView()
 
 BOOL CSnakeView::PreCreateWindow(CREATESTRUCT& cs)
 {
-	bg_brush.CreateSolidBrush(RGB(38, 46, 49));
-	score_brush.CreateSolidBrush(RGB(80, 46, 80));
-	food_brush.CreateSolidBrush(RGB(252, 70, 60));
-	snake_brush.CreateSolidBrush(RGB(40, 142, 228));
-
+	
 	m_bg.LoadBitmap(IDB_BG);
 
 	return CView::PreCreateWindow(cs);
@@ -60,6 +56,21 @@ void CSnakeView::OnDraw(CDC* pDC)
 		return;
 
 	//GetClientRect(game_rect);
+
+	// TO DO: FIX THE BUG
+	// DEBUGGING ASSERTATION FAILED
+	/*if (pDoc->current->m_bg == "DEFAULT")
+	{
+		m_bg.LoadBitmap(IDB_BG);
+	}
+	else if (pDoc->current->m_bg == "LIGHT")
+	{
+		m_bg.LoadBitmap(IDB_BG_LIGHT);
+	}
+	else if (pDoc->current->m_bg == "DARK")
+	{
+		m_bg.LoadBitmap(IDB_BG_DARK);
+	}*/
 	
 	// Draw the window background
 	SetRect(window_rect, 0, 0, 620 + 120, 775 + 120);

@@ -216,6 +216,8 @@
   <ItemGroup>
     <Image Include="res\background.bmp" />
     <Image Include="res\background.png" />
+    <Image Include="res\background_dark.bmp" />
+    <Image Include="res\background_light.bmp" />
     <Image Include="res\info.bmp" />
     <Image Include="res\MySnake.bmp" />
     <Image Include="res\MySnake.ico" />
