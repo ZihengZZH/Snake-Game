@@ -55,7 +55,7 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 	cs.style = WS_OVERLAPPED | WS_CAPTION | FWS_ADDTOTITLE 
 		| WS_MINIMIZEBOX | WS_SYSMENU;
 	cs.cx = 620 + 120;
-	cs.cy = 775 + 120;
+	cs.cy = 775 + 50;
 
 	return TRUE;
 }

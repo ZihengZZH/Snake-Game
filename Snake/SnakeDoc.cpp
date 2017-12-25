@@ -46,7 +46,7 @@ CSnakeDoc::CSnakeDoc()
 	light.bg.CreateSolidBrush(RGB(184, 171, 165));
 	light.score.CreateSolidBrush(RGB(80, 46, 80));
 	light.food.CreateSolidBrush(RGB(255, 237, 131));
-	light.snake.CreateSolidBrush(RGB(124, 243, 160));
+	light.snake.CreateSolidBrush(RGB(100, 243, 120));
 	light.m_bg = "LIGHT";
 
 	// Define the dark theme

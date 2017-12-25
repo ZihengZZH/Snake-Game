@@ -23,6 +23,8 @@ public:
 	CString score;
 	//CImage m_bg;
 	CBitmap m_bg;
+	CBitmap m_bg_light;
+	CBitmap m_bg_dark;
 
 // Operations
 public:

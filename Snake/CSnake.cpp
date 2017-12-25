@@ -87,11 +87,23 @@ BOOL Snake::isDied()
 
 void Snake::generateFood()
 {
-	UINT x = rand() % (WIDTH - 20);
-	UINT y = rand() % (HEIGHT - 20);
-	UINT X = 20 * (x / 20) + 10 + BORDER;
-	UINT Y = 20 * (y / 20) + 10 + BORDER;
-	CPoint point = CPoint(X, Y);
+	BOOL overlap = TRUE;
+	UINT x, y, X, Y;
+	CPoint point;
+	while (overlap)
+	{
+		x = rand() % (WIDTH - 20);
+		y = rand() % (HEIGHT - 20);
+		X = 20 * (x / 20) + 10 + BORDER;
+		Y = 20 * (y / 20) + 10 + BORDER;
+		for (vector<CPoint>::iterator iter = snake_list.begin();
+			iter != snake_list.end(); iter++)
+		{
+			point = CPoint(X, Y);
+			if (*iter != point)
+				overlap = FALSE;
+		}
+	}
 	food = CPoint(point);
 }
 

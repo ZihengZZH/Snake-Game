@@ -42,6 +42,8 @@ BOOL CSnakeView::PreCreateWindow(CREATESTRUCT& cs)
 {
 	
 	m_bg.LoadBitmap(IDB_BG);
+	m_bg_light.LoadBitmap(IDB_BG_LIGHT);
+	m_bg_dark.LoadBitmap(IDB_BG_DARK);
 
 	return CView::PreCreateWindow(cs);
 }
@@ -56,21 +58,6 @@ void CSnakeView::OnDraw(CDC* pDC)
 		return;
 
 	//GetClientRect(game_rect);
-
-	// TO DO: FIX THE BUG
-	// DEBUGGING ASSERTATION FAILED
-	/*if (pDoc->current->m_bg == "DEFAULT")
-	{
-		m_bg.LoadBitmap(IDB_BG);
-	}
-	else if (pDoc->current->m_bg == "LIGHT")
-	{
-		m_bg.LoadBitmap(IDB_BG_LIGHT);
-	}
-	else if (pDoc->current->m_bg == "DARK")
-	{
-		m_bg.LoadBitmap(IDB_BG_DARK);
-	}*/
 	
 	// Draw the window background
 	SetRect(window_rect, 0, 0, 620 + 120, 775 + 120);
@@ -79,11 +66,19 @@ void CSnakeView::OnDraw(CDC* pDC)
 	// Draw the game background
 	CDC m_bgcDC;
 	m_bgcDC.CreateCompatibleDC(NULL);
-	m_bgcDC.SelectObject(&m_bg);
+	if (pDoc->current->m_bg == "DEFAULT")
+		m_bgcDC.SelectObject(&m_bg);
+	else if (pDoc->current->m_bg == "LIGHT")
+		m_bgcDC.SelectObject(&m_bg_light);
+	else if (pDoc->current->m_bg == "DARK")
+		m_bgcDC.SelectObject(&m_bg_dark);
+	
+	//m_bgcDC.SelectObject(&m_bg);
 	pDC->BitBlt(BORDER, BORDER, WIDTH+BORDER, HEIGHT+BORDER, &m_bgcDC, 0, 0, SRCCOPY);
 
 	// Draw the score region
-	SetRect(score_rect, BORDER, 600+BORDER, WIDTH+BORDER, HEIGHT+BORDER*2);
+	SetRect(score_rect, BORDER, 0, WIDTH+BORDER, BORDER);
+	//SetRect(score_rect, BORDER, HEIGHT+BORDER, WIDTH+BORDER, HEIGHT+BORDER*2);
 	pDC->FillRect(score_rect, &pDoc->current->score);
 
 	// Draw the food rectangle
@@ -101,7 +96,7 @@ void CSnakeView::OnDraw(CDC* pDC)
 	}
 
 	score.Format(_T("SCORE: %d"), (-1 + snake.snake_list.size()));
-	pDC->SelectObject(GetStockObject(DEFAULT_GUI_FONT));
+	pDC->SelectObject(GetStockObject(SYSTEM_FONT));
 	pDC->SetTextColor(::GetSysColor(COLOR_WINDOWTEXT));
 	pDC->DrawText(score, -1, score_rect, DT_CENTER | DT_SINGLELINE | DT_NOPREFIX | DT_VCENTER | DT_END_ELLIPSIS);
 }
