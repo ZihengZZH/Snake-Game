@@ -65,6 +65,7 @@ void CSnakeView::OnDraw(CDC* pDC)
 
 	// Draw the game background
 	CDC m_bgcDC;
+	// Choose the theme background
 	m_bgcDC.CreateCompatibleDC(NULL);
 	if (pDoc->current->m_bg == "DEFAULT")
 		m_bgcDC.SelectObject(&m_bg);
