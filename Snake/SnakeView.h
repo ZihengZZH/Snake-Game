@@ -18,13 +18,22 @@ public:
 	CRect window_rect;
 	CRect game_rect;
 	CRect score_rect;
+	CRect highest_rect;
 	CRect food_rect;
 	CRect snake_rect;
 	CString score;
-	//CImage m_bg;
+	CString highest;
+	UINT m_score;
+	UINT m_highest;
 	CBitmap m_bg;
 	CBitmap m_bg_light;
 	CBitmap m_bg_dark;
+	CImage m_food;
+	CImage m_trophy;
+	CRect m_food_rect;
+	CRect m_trophy_rect;
+	CDC m_cacheDC;
+	CBitmap m_cacheCBitmap;
 
 // Operations
 public:

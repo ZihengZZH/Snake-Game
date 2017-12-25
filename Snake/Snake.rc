@@ -417,6 +417,8 @@ END
 
 IDB_BG                  PNG                     "res\\background.png"
 
+IDB_FOOD                PNG                     "res\\red apple.png"
+
 #endif    // English (United Kingdom) resources
 /////////////////////////////////////////////////////////////////////////////
 

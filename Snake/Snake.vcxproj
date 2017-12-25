@@ -221,6 +221,8 @@
     <Image Include="res\info.bmp" />
     <Image Include="res\MySnake.bmp" />
     <Image Include="res\MySnake.ico" />
+    <Image Include="res\red apple.bmp" />
+    <Image Include="res\red apple.png" />
     <Image Include="res\Snake.ico" />
     <Image Include="res\SnakeDoc.ico" />
     <Image Include="res\Toolbar.bmp" />

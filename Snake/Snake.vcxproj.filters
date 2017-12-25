@@ -104,5 +104,11 @@
     <Image Include="res\background_light.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="res\red apple.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\red apple.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

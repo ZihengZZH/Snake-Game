@@ -92,6 +92,7 @@ void Snake::generateFood()
 	CPoint point;
 	while (overlap)
 	{
+		overlap = FALSE;
 		x = rand() % (WIDTH - 20);
 		y = rand() % (HEIGHT - 20);
 		X = 20 * (x / 20) + 10 + BORDER;
@@ -100,8 +101,16 @@ void Snake::generateFood()
 			iter != snake_list.end(); iter++)
 		{
 			point = CPoint(X, Y);
-			if (*iter != point)
+			if (*iter == point)
+			{
+				overlap = TRUE;
+				break;
+			}	
+			else if (iter == snake_list.end() - 1)
+			{
 				overlap = FALSE;
+				break;
+			}
 		}
 	}
 	food = CPoint(point);

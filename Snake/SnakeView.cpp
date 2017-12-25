@@ -44,7 +44,8 @@ BOOL CSnakeView::PreCreateWindow(CREATESTRUCT& cs)
 	m_bg.LoadBitmap(IDB_BG);
 	m_bg_light.LoadBitmap(IDB_BG_LIGHT);
 	m_bg_dark.LoadBitmap(IDB_BG_DARK);
-
+	m_food.Load(_T("res//apple.png"));
+	m_trophy.Load(_T("res//trophy.png"));
 	return CView::PreCreateWindow(cs);
 }
 
@@ -56,8 +57,11 @@ void CSnakeView::OnDraw(CDC* pDC)
 	ASSERT_VALID(pDoc);
 	if (!pDoc)
 		return;
-
-	//GetClientRect(game_rect);
+	
+	/*GetClientRect(&game_rect);
+	m_cacheDC.CreateCompatibleDC(NULL);
+	m_cacheCBitmap.CreateCompatibleBitmap(pDC, game_rect.Width(), game_rect.Height());
+	m_cacheDC.SelectObject(m_cacheCBitmap);*/
 	
 	// Draw the window background
 	SetRect(window_rect, 0, 0, 620 + 120, 775 + 120);
@@ -73,20 +77,15 @@ void CSnakeView::OnDraw(CDC* pDC)
 		m_bgcDC.SelectObject(&m_bg_light);
 	else if (pDoc->current->m_bg == "DARK")
 		m_bgcDC.SelectObject(&m_bg_dark);
-	
 	//m_bgcDC.SelectObject(&m_bg);
 	pDC->BitBlt(BORDER, BORDER, WIDTH+BORDER, HEIGHT+BORDER, &m_bgcDC, 0, 0, SRCCOPY);
-
-	// Draw the score region
-	SetRect(score_rect, BORDER, 0, WIDTH+BORDER, BORDER);
 	
-	pDC->FillRect(score_rect, &pDoc->current->score);
-
 	// Draw the food rectangle
 	SetRect(food_rect, snake.food.x - 10, snake.food.y - 10,
 		snake.food.x + 10, snake.food.y + 10);
+	//m_food.Draw(*pDC, food_rect);
 	pDC->FillRect(food_rect, &pDoc->current->food);
-
+	
 	// Draw the snake rectangle
 	for (vector<CPoint>::iterator iter = snake.snake_list.begin(); 
 		iter != snake.snake_list.end(); ++iter) 
@@ -96,10 +95,30 @@ void CSnakeView::OnDraw(CDC* pDC)
 		pDC->FillRect(snake_rect, &pDoc->current->snake);
 	}
 
-	score.Format(_T("SCORE: %d"), (-1 + snake.snake_list.size()));
+	m_score = -1 + snake.snake_list.size();
+	m_highest = 1000;
+
+	// Draw the score region
+	SetRect(score_rect, BORDER, 0, WIDTH/3 + BORDER, BORDER);
+	SetRect(highest_rect, BORDER, 0, WIDTH, BORDER);
+	SetRect(m_food_rect, BORDER, 5, BORDER+50, 55);
+	SetRect(m_trophy_rect, BORDER+150, 5, BORDER+200, 55);
+	//pDC->FillRect(score_rect, &pDoc->current->score);
+	m_food.Draw(*pDC, m_food_rect);
+	m_trophy.Draw(*pDC, m_trophy_rect);
+
+	// Score string
+	score.Format(_T("SCORE: %d"), m_score);
 	pDC->SelectObject(GetStockObject(SYSTEM_FONT));
 	pDC->SetTextColor(::GetSysColor(COLOR_WINDOWTEXT));
+	pDC->SetBkMode(TRANSPARENT);
 	pDC->DrawText(score, -1, score_rect, DT_CENTER | DT_SINGLELINE | DT_NOPREFIX | DT_VCENTER | DT_END_ELLIPSIS);
+
+	// Highest score string
+	highest.Format(_T("HIGHEST: %d"), m_highest);
+	pDC->SelectObject(GetStockObject(SYSTEM_FONT));
+	pDC->SetTextColor(::GetSysColor(COLOR_WINDOWTEXT));
+	pDC->DrawText(highest, -1, highest_rect, DT_CENTER | DT_SINGLELINE | DT_NOPREFIX | DT_VCENTER | DT_END_ELLIPSIS);
 }
 
 
