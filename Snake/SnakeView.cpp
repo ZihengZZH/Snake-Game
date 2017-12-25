@@ -78,7 +78,7 @@ void CSnakeView::OnDraw(CDC* pDC)
 
 	// Draw the score region
 	SetRect(score_rect, BORDER, 0, WIDTH+BORDER, BORDER);
-	//SetRect(score_rect, BORDER, HEIGHT+BORDER, WIDTH+BORDER, HEIGHT+BORDER*2);
+	
 	pDC->FillRect(score_rect, &pDoc->current->score);
 
 	// Draw the food rectangle
