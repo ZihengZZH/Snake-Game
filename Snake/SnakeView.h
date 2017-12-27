@@ -34,6 +34,7 @@ public:
 	CRect m_trophy_rect;
 	CDC m_cacheDC;
 	CBitmap m_cacheCBitmap;
+	CFont m_font;
 
 // Operations
 public:

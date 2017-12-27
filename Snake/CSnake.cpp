@@ -70,9 +70,11 @@ BOOL Snake::move()
 		return FALSE;
 	}
 	for (vector<CPoint>::iterator iter = snake_list.begin() + 1;
-		iter != snake_list.end(); ++iter) {
+		iter != snake_list.end(); ++iter) 
+	{
 		if (snake_list.front().x == iter->x
-			&& snake_list.front().y == iter->y) {
+			&& snake_list.front().y == iter->y) 
+		{
 			return FALSE;
 		}
 	}

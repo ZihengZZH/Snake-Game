@@ -46,6 +46,10 @@ BOOL CSnakeView::PreCreateWindow(CREATESTRUCT& cs)
 	m_bg_dark.LoadBitmap(IDB_BG_DARK);
 	m_food.Load(_T("res//apple.png"));
 	m_trophy.Load(_T("res//trophy.png"));
+
+	// Set the font for score display
+	m_font.CreatePointFont(180, L"Arial");
+
 	return CView::PreCreateWindow(cs);
 }
 
@@ -77,7 +81,6 @@ void CSnakeView::OnDraw(CDC* pDC)
 		m_bgcDC.SelectObject(&m_bg_light);
 	else if (pDoc->current->m_bg == "DARK")
 		m_bgcDC.SelectObject(&m_bg_dark);
-	//m_bgcDC.SelectObject(&m_bg);
 	pDC->BitBlt(BORDER, BORDER, WIDTH+BORDER, HEIGHT+BORDER, &m_bgcDC, 0, 0, SRCCOPY);
 	
 	// Draw the food rectangle
@@ -99,25 +102,31 @@ void CSnakeView::OnDraw(CDC* pDC)
 	m_highest = 1000;
 
 	// Draw the score region
-	SetRect(score_rect, BORDER, 0, WIDTH/3 + BORDER, BORDER);
-	SetRect(highest_rect, BORDER, 0, WIDTH, BORDER);
-	SetRect(m_food_rect, BORDER, 5, BORDER+50, 55);
-	SetRect(m_trophy_rect, BORDER+150, 5, BORDER+200, 55);
-	//pDC->FillRect(score_rect, &pDoc->current->score);
+	SetRect(score_rect, BORDER*1.5, 0, WIDTH/4, BORDER);
+	SetRect(highest_rect, BORDER*3, 0, WIDTH/2, BORDER);
+	SetRect(m_food_rect, BORDER, 5, BORDER+40, 50);
+	SetRect(m_trophy_rect, BORDER+100, 10, BORDER+140, 50);
 	m_food.Draw(*pDC, m_food_rect);
 	m_trophy.Draw(*pDC, m_trophy_rect);
+	/*
+	There are still problems with the icon that will flicker.
+	Sometimes it might affect user experience.
+	*/
+	
+	// Transparent the background of text
+	pDC->SetBkMode(TRANSPARENT);
 
 	// Score string
-	score.Format(_T("SCORE: %d"), m_score);
-	pDC->SelectObject(GetStockObject(SYSTEM_FONT));
-	pDC->SetTextColor(::GetSysColor(COLOR_WINDOWTEXT));
-	pDC->SetBkMode(TRANSPARENT);
+	score.Format(_T("%d"), m_score);
+	//pDC->SelectObject(GetStockObject(SYSTEM_FONT));
+	pDC->SelectObject(m_font);
+	pDC->SetTextColor(RGB(255,255,255));
 	pDC->DrawText(score, -1, score_rect, DT_CENTER | DT_SINGLELINE | DT_NOPREFIX | DT_VCENTER | DT_END_ELLIPSIS);
 
 	// Highest score string
-	highest.Format(_T("HIGHEST: %d"), m_highest);
-	pDC->SelectObject(GetStockObject(SYSTEM_FONT));
-	pDC->SetTextColor(::GetSysColor(COLOR_WINDOWTEXT));
+	highest.Format(_T("%d"), m_highest);
+	pDC->SelectObject(m_font);
+	pDC->SetTextColor(RGB(255, 255, 255));
 	pDC->DrawText(highest, -1, highest_rect, DT_CENTER | DT_SINGLELINE | DT_NOPREFIX | DT_VCENTER | DT_END_ELLIPSIS);
 }
 
