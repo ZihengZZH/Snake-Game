@@ -32,8 +32,6 @@ public:
 	CImage m_trophy;
 	CRect m_food_rect;
 	CRect m_trophy_rect;
-	CDC m_cacheDC;
-	CBitmap m_cacheCBitmap;
 	CFont m_font;
 
 // Operations

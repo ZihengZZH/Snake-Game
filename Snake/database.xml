@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record>
+	<highest id="low">
+		<level>low</level>
+		<score>4</score>
+		<time></time>
+	</highest>
+	<highest id="default">
+		<level>default</level>
+		<score>2</score>
+		<time></time>
+	</highest>
+	<highest id="high">
+		<level>high</level>
+		<score>0</score>
+		<time></time>
+	</highest>
+</record>

@@ -30,9 +30,13 @@ public:
 	UINT speed_default;
 	UINT speed_high;
 	UINT *speed_current;
+	UINT new_highest;
+
 
 // Operations
 public:
+	void UpdateDatabase();
+
 
 // Overrides
 public:

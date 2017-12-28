@@ -10,8 +10,11 @@
 #endif
 
 #include "SnakeDoc.h"
-
 #include <propkey.h>
+
+#include <MsXml6.h>
+#include <comutil.h>
+#pragma comment(lib, "comsuppwd.lib")
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -78,6 +81,95 @@ CSnakeDoc::CSnakeDoc()
 
 CSnakeDoc::~CSnakeDoc()
 {
+}
+
+void CSnakeDoc::UpdateDatabase()
+{
+	CoInitialize(NULL);
+	CComPtr<IXMLDOMDocument> spXmldoc;
+	HRESULT hr = spXmldoc.CoCreateInstance(L"MSXML2.DOMDocument.6.0");
+
+	if (SUCCEEDED(hr))
+	{
+		VARIANT_BOOL isSuccessful;
+		CComVariant varXmlFile(L"database.xml");
+
+		spXmldoc->put_async(VARIANT_FALSE);
+		HRESULT hr = spXmldoc->load(varXmlFile, &isSuccessful);
+
+		if (isSuccessful == VARIANT_TRUE)
+		{
+			CComBSTR bstrXml;
+			CComPtr<IXMLDOMElement> spRoot = NULL;
+			CComPtr<IXMLDOMElement> spRecord = NULL;
+			CComPtr<IXMLDOMElement> spScore = NULL;
+			CComPtr<IXMLDOMNode> spTheNode = NULL;
+
+			// KEY TO INCLUDE THE ROOT
+			hr = spXmldoc->get_documentElement(&spRoot);
+			spRoot->get_xml(&bstrXml);
+
+			if (speed_current == &speed_low)
+			{
+				spRoot->selectSingleNode(L"/record/highest[@id='low']", &spTheNode);
+			}
+			else if (speed_current == &speed_default)
+			{
+				spRoot->selectSingleNode(L"/record/highest[@id='default']", &spTheNode);
+			}
+			else
+			{
+				spRoot->selectSingleNode(L"/record/highest[@id='high']", &spTheNode);
+			}
+
+			hr = spTheNode.QueryInterface(&spRecord);
+			spTheNode.Release();
+
+			spRecord->get_xml(&bstrXml);
+
+			CComPtr<IXMLDOMNodeList> spNodeList = NULL;
+			CComPtr<IXMLDOMNode> spListItem = NULL;
+			spRecord->get_childNodes(&spNodeList);
+			spNodeList->get_item(1, &spListItem);
+
+			if (spListItem)
+			{
+				spListItem->get_xml(&bstrXml);
+
+				VARIANT value;
+				hr = spListItem->get_nodeTypedValue(&value);
+				if (FAILED(hr))
+					throw "failed";
+
+				if (hr == S_OK)
+				{
+					UINT m_old = 0;
+					if (value.vt == VT_BSTR)
+					{
+						CString strValue = (_bstr_t)value;
+						m_old = _ttoi((LPCTSTR)strValue);
+					}
+					UINT m_new = new_highest;
+					if (m_new > m_old)
+					{
+						CString m_new_str;
+						m_new_str.Format(_T("%u"), m_new);
+						spListItem->put_text(m_new_str.AllocSysString());
+					}
+				}
+			}
+
+			spRecord.Release();
+			spRoot.Release();
+			bstrXml.Empty();
+
+			spXmldoc->save(varXmlFile);
+		}
+		varXmlFile.Clear();
+	}
+
+	spXmldoc.Release();
+	CoUninitialize();
 }
 
 BOOL CSnakeDoc::OnNewDocument()

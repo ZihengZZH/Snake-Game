@@ -227,6 +227,9 @@
     <Image Include="res\SnakeDoc.ico" />
     <Image Include="res\Toolbar.bmp" />
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="database.xml" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
