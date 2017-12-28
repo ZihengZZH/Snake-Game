@@ -35,6 +35,7 @@ public:
 
 // Operations
 public:
+	UINT RetrieveDatabase();
 	void UpdateDatabase();
 
 
@@ -78,4 +79,6 @@ public:
 	afx_msg void OnUpdateSpeedLow(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateSpeedDefault(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateSpeedHigh(CCmdUI *pCmdUI);
+	afx_msg void OnGameSave();
+	afx_msg void OnGameOpen();
 };

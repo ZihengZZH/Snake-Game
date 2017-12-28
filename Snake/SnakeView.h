@@ -25,6 +25,7 @@ public:
 	CString highest;
 	UINT m_score;
 	UINT m_highest;
+	UINT m_speed;
 	CBitmap m_bg;
 	CBitmap m_bg_light;
 	CBitmap m_bg_dark;
@@ -33,6 +34,7 @@ public:
 	CRect m_food_rect;
 	CRect m_trophy_rect;
 	CFont m_font;
+
 
 // Operations
 public:
@@ -68,6 +70,9 @@ public:
 	afx_msg void OnSTART();
 	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
+	afx_msg void OnGamePause();
+	afx_msg void OnGameContinue();
+	afx_msg void OnGameStop();
 };
 
 #ifndef _DEBUG  // debug version in SnakeView.cpp

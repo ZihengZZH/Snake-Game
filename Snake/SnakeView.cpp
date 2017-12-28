@@ -26,12 +26,18 @@ BEGIN_MESSAGE_MAP(CSnakeView, CView)
 	ON_WM_TIMER()
 	ON_WM_CONTEXTMENU()
 	ON_COMMAND(ID_START, &CSnakeView::OnSTART)
+	ON_COMMAND(ID_GAME_PAUSE, &CSnakeView::OnGamePause)
+	ON_COMMAND(ID_GAME_CONTINUE, &CSnakeView::OnGameContinue)
+	ON_COMMAND(ID_GAME_STOP, &CSnakeView::OnGameStop)
 END_MESSAGE_MAP()
 
 // CSnakeView construction/destruction
 
 CSnakeView::CSnakeView()
 {
+	m_score = 0;
+	m_highest = 0;
+	m_speed = 100;
 }
 
 CSnakeView::~CSnakeView()
@@ -108,11 +114,10 @@ void CSnakeView::OnDraw(CDC* pDC)
 	}
 
 	m_score = -1 + snake.snake_list.size();
-	m_highest = 1000;
 
 	// Draw the score region
 	SetRect(score_rect, BORDER*1.5, 0, WIDTH/4, BORDER);
-	SetRect(highest_rect, BORDER*3, 0, WIDTH/2, BORDER);
+	SetRect(highest_rect, BORDER*2.5, 0, WIDTH/2, BORDER);
 	SetRect(m_food_rect, BORDER, 5, BORDER+40, 50);
 	SetRect(m_trophy_rect, BORDER+100, 10, BORDER+140, 50);
 	m_food.Draw(m_cacheDC, m_food_rect);
@@ -226,7 +231,10 @@ void CSnakeView::OnSTART()
 	if (!pDoc)
 		return;
 
-	SetTimer(1, *pDoc->speed_current, NULL); // speed depends on nElasp ms 
+	m_highest = pDoc->RetrieveDatabase();
+	m_speed = *pDoc->speed_current;
+
+	SetTimer(1, m_speed, NULL); // speed depends on nElasp ms 
 	srand(time(NULL));
 	snake.generateFood();
 	snake.snake_list = snake.default_state;
@@ -273,4 +281,22 @@ void CSnakeView::OnTimer(UINT_PTR nIDEvent)
 	Invalidate(FALSE);
 
 	CView::OnTimer(nIDEvent);
+}
+
+
+void CSnakeView::OnGamePause()
+{
+	KillTimer(1);
+}
+
+
+void CSnakeView::OnGameContinue()
+{
+	SetTimer(1, m_speed, NULL);
+}
+
+
+void CSnakeView::OnGameStop()
+{
+	
 }

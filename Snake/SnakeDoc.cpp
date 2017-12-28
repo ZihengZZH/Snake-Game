@@ -37,6 +37,8 @@ BEGIN_MESSAGE_MAP(CSnakeDoc, CDocument)
 	ON_UPDATE_COMMAND_UI(ID_SPEED_LOW, &CSnakeDoc::OnUpdateSpeedLow)
 	ON_UPDATE_COMMAND_UI(ID_SPEED_DEFAULT, &CSnakeDoc::OnUpdateSpeedDefault)
 	ON_UPDATE_COMMAND_UI(ID_SPEED_HIGH, &CSnakeDoc::OnUpdateSpeedHigh)
+	ON_COMMAND(ID_GAME_SAVE, &CSnakeDoc::OnGameSave)
+	ON_COMMAND(ID_GAME_OPEN, &CSnakeDoc::OnGameOpen)
 END_MESSAGE_MAP()
 
 
@@ -83,6 +85,83 @@ CSnakeDoc::~CSnakeDoc()
 {
 }
 
+UINT CSnakeDoc::RetrieveDatabase()
+{
+	UINT m_old;
+
+	CoInitialize(NULL);
+	CComPtr<IXMLDOMDocument> spXmldoc;
+	HRESULT hr = spXmldoc.CoCreateInstance(L"MSXML2.DOMDocument.6.0");
+
+	if (SUCCEEDED(hr))
+	{
+		VARIANT_BOOL isSuccessful;
+		CComVariant varXmlFile(L"database.xml");
+
+		spXmldoc->put_async(VARIANT_FALSE);
+		HRESULT hr = spXmldoc->load(varXmlFile, &isSuccessful);
+
+		if (isSuccessful == VARIANT_TRUE)
+		{
+			CComBSTR bstrXml;
+			CComPtr<IXMLDOMElement> spRoot = NULL;
+			CComPtr<IXMLDOMElement> spRecord = NULL;
+			CComPtr<IXMLDOMElement> spScore = NULL;
+			CComPtr<IXMLDOMNode> spTheNode = NULL;
+
+			// KEY TO INCLUDE THE ROOT
+			hr = spXmldoc->get_documentElement(&spRoot);
+			spRoot->get_xml(&bstrXml);
+
+			if (speed_current == &speed_low)
+				spRoot->selectSingleNode(L"/record/highest[@id='low']", &spTheNode);
+			else if (speed_current == &speed_default)
+				spRoot->selectSingleNode(L"/record/highest[@id='default']", &spTheNode);
+			else
+				spRoot->selectSingleNode(L"/record/highest[@id='high']", &spTheNode);
+
+			hr = spTheNode.QueryInterface(&spRecord);
+			spTheNode.Release();
+
+			spRecord->get_xml(&bstrXml);
+
+			CComPtr<IXMLDOMNodeList> spNodeList = NULL;
+			CComPtr<IXMLDOMNode> spListItem = NULL;
+			spRecord->get_childNodes(&spNodeList);
+			spNodeList->get_item(1, &spListItem);
+
+			if (spListItem)
+			{
+				spListItem->get_xml(&bstrXml);
+
+				VARIANT value;
+				hr = spListItem->get_nodeTypedValue(&value);
+				if (FAILED(hr))
+					throw "failed";
+
+				if (hr == S_OK)
+				{
+					m_old = 0;
+					if (value.vt == VT_BSTR)
+					{
+						CString strValue = (_bstr_t)value;
+						m_old = _ttoi((LPCTSTR)strValue);
+					}
+				}
+			}
+			spRecord.Release();
+			spRoot.Release();
+			bstrXml.Empty();
+		}
+		varXmlFile.Clear();
+	}
+
+	spXmldoc.Release();
+	CoUninitialize();
+
+	return m_old;
+}
+
 void CSnakeDoc::UpdateDatabase()
 {
 	CoInitialize(NULL);
@@ -110,17 +189,11 @@ void CSnakeDoc::UpdateDatabase()
 			spRoot->get_xml(&bstrXml);
 
 			if (speed_current == &speed_low)
-			{
 				spRoot->selectSingleNode(L"/record/highest[@id='low']", &spTheNode);
-			}
 			else if (speed_current == &speed_default)
-			{
 				spRoot->selectSingleNode(L"/record/highest[@id='default']", &spTheNode);
-			}
 			else
-			{
 				spRoot->selectSingleNode(L"/record/highest[@id='high']", &spTheNode);
-			}
 
 			hr = spTheNode.QueryInterface(&spRecord);
 			spTheNode.Release();
@@ -344,3 +417,15 @@ void CSnakeDoc::OnUpdateSpeedHigh(CCmdUI *pCmdUI)
 }
 
 
+
+
+void CSnakeDoc::OnGameSave()
+{
+	// TODO: Add your command handler code here
+}
+
+
+void CSnakeDoc::OnGameOpen()
+{
+	// TODO: Add your command handler code here
+}

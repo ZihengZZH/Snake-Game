@@ -7,12 +7,12 @@
 	</highest>
 	<highest id="default">
 		<level>default</level>
-		<score>2</score>
+		<score>7</score>
 		<time></time>
 	</highest>
 	<highest id="high">
 		<level>high</level>
-		<score>0</score>
+		<score>5</score>
 		<time></time>
 	</highest>
 </record>

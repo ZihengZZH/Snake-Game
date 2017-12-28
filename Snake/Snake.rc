@@ -73,6 +73,13 @@ BEGIN
     POPUP "&Game"
     BEGIN
         MENUITEM "&New",                        ID_START
+        MENUITEM SEPARATOR
+        MENUITEM "&Pause",                      ID_GAME_PAUSE
+        MENUITEM "&Continue",                   ID_GAME_CONTINUE
+        MENUITEM "&Stop",                       ID_GAME_STOP
+        MENUITEM SEPARATOR
+        MENUITEM "&Save",                       ID_GAME_SAVE
+        MENUITEM "&Open",                       ID_GAME_OPEN
     END
     POPUP "&Speed"
     BEGIN
