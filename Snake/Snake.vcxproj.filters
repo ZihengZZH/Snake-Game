@@ -45,6 +45,9 @@
     <ClInclude Include="CSnake.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CwzdSplash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Snake.cpp">
@@ -63,6 +66,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CSnake.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CwzdSplash.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -111,6 +117,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="res\red apple.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Splash.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

@@ -186,6 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CSnake.h" />
+    <ClInclude Include="CwzdSplash.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Snake.h" />
@@ -196,6 +197,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CSnake.cpp" />
+    <ClCompile Include="CwzdSplash.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="Snake.cpp" />
     <ClCompile Include="SnakeDoc.cpp" />
@@ -225,6 +227,7 @@
     <Image Include="res\red apple.png" />
     <Image Include="res\Snake.ico" />
     <Image Include="res\SnakeDoc.ico" />
+    <Image Include="res\Splash.bmp" />
     <Image Include="res\Toolbar.bmp" />
   </ItemGroup>
   <ItemGroup>

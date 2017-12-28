@@ -6,6 +6,7 @@
 #include "Snake.h"
 
 #include "MainFrm.h"
+#include "CwzdSplash.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -40,6 +41,14 @@ CMainFrame::~CMainFrame()
 
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
+
+	CwzdSplash wndSplash;
+	wndSplash.Create(IDB_SPLASH);
+	wndSplash.CenterWindow();
+	wndSplash.UpdateWindow();
+	Sleep(2500);
+	wndSplash.DestroyWindow();
+
 	if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
 		return -1;
 
@@ -55,7 +64,7 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 	cs.style = WS_OVERLAPPED | WS_CAPTION | FWS_ADDTOTITLE 
 		| WS_MINIMIZEBOX | WS_SYSMENU;
 	cs.cx = 620 + 120;
-	cs.cy = 775 + 50;
+	cs.cy = 775;
 
 	return TRUE;
 }

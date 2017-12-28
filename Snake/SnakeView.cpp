@@ -54,7 +54,7 @@ BOOL CSnakeView::PreCreateWindow(CREATESTRUCT& cs)
 	m_trophy.Load(_T("res//trophy.png"));
 
 	// Set the font for score display
-	m_font.CreatePointFont(180, L"Arial");
+	m_font.CreatePointFont(180, L"Century Gothic"); // Small Fonts
 
 	return CView::PreCreateWindow(cs);
 }
@@ -113,7 +113,7 @@ void CSnakeView::OnDraw(CDC* pDC)
 		//pDC->FillRect(snake_rect, &pDoc->current->snake);
 	}
 
-	m_score = -1 + snake.snake_list.size();
+	m_score = -3 + snake.snake_list.size();
 
 	// Draw the score region
 	SetRect(score_rect, BORDER*1.5, 0, WIDTH/4, BORDER);

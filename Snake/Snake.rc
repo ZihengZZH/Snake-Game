@@ -377,6 +377,8 @@ IDB_BG_DARK             BITMAP                  "res\\background_dark.bmp"
 
 IDB_BG_LIGHT            BITMAP                  "res\\background_light.bmp"
 
+IDB_SPLASH              BITMAP                  "res\\Splash.bmp"
+
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////

@@ -2,20 +2,17 @@
 #include "CSnake.h"
 
 
-// The original length of the snake should be 3
-// This should be fixed later on
+// The original length of the snake is 3
 Snake::Snake()
 {
 	CPoint point;
 	point = CPoint(310, 310);
 	snake_list.push_back(point);
-	//point = CPoint(330, 310);
-	//snake_list.push_back(point);
-	//point = CPoint(350, 310);
-	//snake_list.push_back(point);
-
+	snake_list.push_back(*(snake_list.end() - 1));
+	snake_list.push_back(*(snake_list.end() - 1));
+	
+	food = point;
 	default_state = snake_list;
-
 	direction = RIGHT;
 	is_food = FALSE;
 }
