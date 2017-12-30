@@ -95,6 +95,10 @@ BEGIN
         MENUITEM "&Light",                      ID_THEME_LIGHT
         MENUITEM "&Dark",                       ID_THEME_DARK
     END
+    POPUP "&Key"
+    BEGIN
+        MENUITEM "&KeyControl",                 ID_KEY_KEYCONTROL
+    END
     POPUP "&Help"
     BEGIN
         MENUITEM "&About",                      ID_APP_ABOUT
@@ -396,6 +400,17 @@ FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
 END
 
+IDD_KEYBOX DIALOGEX 0, 0, 293, 130
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "DirectionKey"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "UP",IDC_UP,113,26,68,38
+    PUSHBUTTON      "RIGHT",IDC_RIGHT,187,69,68,38
+    PUSHBUTTON      "DOWN",IDC_DOWN,113,69,68,38
+    PUSHBUTTON      "LEFT",IDC_LEFT,39,69,68,38
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -412,6 +427,14 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 173
     END
+
+    IDD_KEYBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 286
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 123
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -422,6 +445,11 @@ END
 //
 
 IDD_LEADERBOX AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_KEYBOX AFX_DIALOG_LAYOUT
 BEGIN
     0
 END

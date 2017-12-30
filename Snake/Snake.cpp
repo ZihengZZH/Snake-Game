@@ -23,6 +23,7 @@
 BEGIN_MESSAGE_MAP(CSnakeApp, CWinApp)
 	ON_COMMAND(ID_APP_ABOUT, &CSnakeApp::OnAppAbout)
 	ON_COMMAND(ID_GAME_LEADERBOARD, &CSnakeApp::OnLeaderAbout)
+	ON_COMMAND(ID_KEY_KEYCONTROL, &CSnakeApp::OnKeyAbout)
 	// Standard file based document commands
 	ON_COMMAND(ID_FILE_NEW, &CWinApp::OnFileNew)
 	ON_COMMAND(ID_FILE_OPEN, &CWinApp::OnFileOpen)
@@ -228,6 +229,8 @@ void CLeaderDlg::DoDataExchange(CDataExchange* pDX)
 
 BOOL CLeaderDlg::OnInitDialog()
 {
+	CDialogEx::OnInitDialog();
+
 	font_new.CreatePointFont(50, L"Century Gothic");
 	m_trophy.Load(_T("res//trophy.png"));
 	m_brush.CreateSolidBrush(RGB(170, 240, 170));
@@ -238,7 +241,7 @@ BOOL CLeaderDlg::OnInitDialog()
 
 void CLeaderDlg::OnPaint()
 {
-	CPaintDC dc(this);
+	/*CPaintDC dc(this);
 	SendMessage(WM_ICONERASEBKGND, 
 		reinterpret_cast<WPARAM>(dc.GetSafeHdc()), 0);
 		
@@ -246,7 +249,7 @@ void CLeaderDlg::OnPaint()
 	GetClientRect(&rect);
 	UINT pivot = rect.Width() / 2;
 	SetRect(trophy_rect, pivot - 30, 5, pivot + 30, 65);
-	
+
 	dc.FillRect(rect, &m_brush);
 	m_trophy.Draw(dc, trophy_rect);
 
@@ -254,15 +257,15 @@ void CLeaderDlg::OnPaint()
 	{
 		SetRect(m_record_rect, pivot - 50, 100 + 50 * i, pivot + 50, 140 + 50 * i);
 		m_level.Format(_T("LEVEL: %d"), m_records[i]);
-		m_score.Format(_T("SCORE: %d"), m_records[i+1]);
-		m_time.Format(_T("TIME: %d"), m_records[i+2]);
+		m_score.Format(_T("SCORE: %d"), m_records[i + 1]);
+		m_time.Format(_T("TIME: %d"), m_records[i + 2]);
 		dc.SelectObject(font_new);
 		dc.SetBkMode(TRANSPARENT);
 		dc.SetTextColor(RGB(50, 50, 80));
 		dc.DrawText(m_level, -1, m_record_rect, DT_CENTER | DT_SINGLELINE | DT_NOPREFIX | DT_TOP | DT_END_ELLIPSIS);
 		dc.DrawText(m_score, -1, m_record_rect, DT_CENTER | DT_SINGLELINE | DT_NOPREFIX | DT_VCENTER | DT_END_ELLIPSIS);
 		dc.DrawText(m_time, -1, m_record_rect, DT_CENTER | DT_SINGLELINE | DT_NOPREFIX | DT_BOTTOM | DT_END_ELLIPSIS);
-	}
+	}*/
 
 
 }
@@ -348,6 +351,135 @@ BEGIN_MESSAGE_MAP(CLeaderDlg, CDialogEx)
 END_MESSAGE_MAP()
 
 
+// CKeyDlg dialog used for Button Control
+
+class CKeyDlg : public CDialogEx
+{
+	//DECLARE_DYNAMIC(CKeyDlg)
+
+public:
+	enum { IDD = IDD_KEYBOX };
+	CKeyDlg();
+	virtual ~CKeyDlg();
+
+protected:
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+
+	DECLARE_MESSAGE_MAP()
+public:
+	CButton m_up;
+	CButton m_down;
+	CButton m_left;
+	CButton m_right;
+	afx_msg void OnClickedDown();
+	afx_msg void OnClickedLeft();
+	afx_msg void OnClickedRight();
+	afx_msg void OnClickedUp();
+	BOOL OnInitDialog();
+	void OnPaint();
+};
+
+CKeyDlg::CKeyDlg() : CDialogEx(IDD_KEYBOX)
+{
+}
+
+CKeyDlg::~CKeyDlg()
+{
+}
+
+void CKeyDlg::DoDataExchange(CDataExchange* pDX)
+{
+	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_UP, m_up);
+	DDX_Control(pDX, IDC_DOWN, m_down);
+	DDX_Control(pDX, IDC_LEFT, m_left);
+	DDX_Control(pDX, IDC_RIGHT, m_right);
+}
+
+BOOL CKeyDlg::OnInitDialog()
+{
+	CDialogEx::OnInitDialog();
+
+	CFont m_font;
+	m_font.CreateFont(50, 0, 0, 0, FW_BOLD, 0, 0, 0,
+		DEFAULT_CHARSET, 0, 0, 0, 0, _T("Arial"));
+	m_up.SetFont(&m_font);
+	m_down.SetFont(&m_font);
+	m_left.SetFont(&m_font);
+	m_right.SetFont(&m_font);
+
+	return TRUE;
+}
+
+void CKeyDlg::OnPaint()
+{
+}
+
+BEGIN_MESSAGE_MAP(CKeyDlg, CDialogEx)
+	ON_BN_CLICKED(IDC_DOWN, &CKeyDlg::OnClickedDown)
+	ON_BN_CLICKED(IDC_LEFT, &CKeyDlg::OnClickedLeft)
+	ON_BN_CLICKED(IDC_RIGHT, &CKeyDlg::OnClickedRight)
+	ON_BN_CLICKED(IDC_UP, &CKeyDlg::OnClickedUp)
+END_MESSAGE_MAP()
+
+
+void CKeyDlg::OnClickedDown()
+{
+	CMainFrame *pFrame = (CMainFrame*)::AfxGetMainWnd();
+	if (pFrame)
+	{
+		CSnakeView *pView = (CSnakeView*)pFrame->GetActiveView();
+		if (pView)
+		{
+			pView->OnDown();
+		}
+	}
+}
+
+
+void CKeyDlg::OnClickedLeft()
+{
+	CMainFrame *pFrame = (CMainFrame*)::AfxGetMainWnd();
+	if (pFrame)
+	{
+		CSnakeView *pView = (CSnakeView*)pFrame->GetActiveView();
+		if (pView)
+		{
+			pView->OnLeft();
+		}
+	}
+}
+
+
+void CKeyDlg::OnClickedRight()
+{
+	CMainFrame *pFrame = (CMainFrame*)::AfxGetMainWnd();
+	if (pFrame)
+	{
+		CSnakeView *pView = (CSnakeView*)pFrame->GetActiveView();
+		if (pView)
+		{
+			pView->OnRight();
+		}
+	}
+}
+
+
+void CKeyDlg::OnClickedUp()
+{
+	CMainFrame *pFrame = (CMainFrame*)::AfxGetMainWnd();
+	if (pFrame)
+	{
+		CSnakeView *pView = (CSnakeView*)pFrame->GetActiveView();
+		if (pView)
+		{
+			pView->OnUp();
+		}
+	}
+}
+
+
+
 // App command to run the dialog
 void CSnakeApp::OnAppAbout()
 {
@@ -359,6 +491,12 @@ void CSnakeApp::OnLeaderAbout()
 {
 	CLeaderDlg leaderDlg;
 	leaderDlg.DoModal();
+}
+
+void CSnakeApp::OnKeyAbout()
+{
+	CKeyDlg keyDlg;
+	keyDlg.DoModal();
 }
 
 

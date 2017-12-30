@@ -11,6 +11,7 @@
 
 #include "SnakeDoc.h"
 #include "SnakeView.h"
+#include "afxwin.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -304,3 +305,4 @@ void CSnakeView::OnGameStop()
 {
 	
 }
+

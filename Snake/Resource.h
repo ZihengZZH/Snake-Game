@@ -19,9 +19,14 @@
 #define IDB_SPLASH                      325
 #define IDD_LEADERBOX                   328
 #define IDB_LEADER                      330
+#define IDD_KEYBOX                      331
 #define IDC_STATIC_ICON                 1000
 #define IDC_STATIC_INFO                 1001
 #define IDC_SYSLINK1                    1002
+#define IDC_UP                          1010
+#define IDC_RIGHT                       1011
+#define IDC_DOWN                        1012
+#define IDC_LEFT                        1013
 #define ID_THEME_DEFAULT                32771
 #define ID_THEME_LIGHT                  32772
 #define ID_THEME_DARK                   32773
@@ -39,14 +44,15 @@
 #define ID_Menu                         32795
 #define ID_GAME_32796                   32796
 #define ID_GAME_LEADERBOARD             32797
+#define ID_KEY_KEYCONTROL               32798
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        331
-#define _APS_NEXT_COMMAND_VALUE         32798
-#define _APS_NEXT_CONTROL_VALUE         1008
+#define _APS_NEXT_RESOURCE_VALUE        333
+#define _APS_NEXT_COMMAND_VALUE         32799
+#define _APS_NEXT_CONTROL_VALUE         1014
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif
