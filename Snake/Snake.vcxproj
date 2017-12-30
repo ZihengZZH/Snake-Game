@@ -229,6 +229,7 @@
     <Image Include="res\SnakeDoc.ico" />
     <Image Include="res\Splash.bmp" />
     <Image Include="res\Toolbar.bmp" />
+    <Image Include="res\trophy.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="database.xml" />

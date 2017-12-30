@@ -5,6 +5,8 @@
 
 #pragma once
 
+#include <vector>
+
 
 class CSnakeDoc : public CDocument
 {
@@ -36,7 +38,8 @@ public:
 
 // Operations
 public:
-	UINT RetrieveDatabase();
+	UINT RetrieveHighest();
+	//std::vector<CString> RetrieveDatabase();
 	void UpdateDatabase();
 
 

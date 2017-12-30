@@ -235,7 +235,7 @@ void CSnakeView::OnSTART()
 	if (!pDoc)
 		return;
 
-	m_highest = pDoc->RetrieveDatabase();
+	m_highest = pDoc->RetrieveHighest();
 	m_speed = *pDoc->speed_current;
 
 	SetTimer(1, m_speed, NULL); // speed depends on nElasp ms 

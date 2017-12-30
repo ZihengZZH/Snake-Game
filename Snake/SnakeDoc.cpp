@@ -12,7 +12,6 @@
 #include "SnakeDoc.h"
 #include <propkey.h>
 
-#include <vector>
 #include <windows.h>
 #include <MsXml6.h>
 #include <comutil.h>
@@ -90,10 +89,9 @@ CSnakeDoc::~CSnakeDoc()
 {
 }
 
-UINT CSnakeDoc::RetrieveDatabase()
+UINT CSnakeDoc::RetrieveHighest()
 {
 	UINT m_old;
-	//std::vector<CString> m_old_record;
 
 	CoInitialize(NULL);
 	CComPtr<IXMLDOMDocument> spXmldoc;
@@ -167,6 +165,89 @@ UINT CSnakeDoc::RetrieveDatabase()
 
 	return m_old;
 }
+
+/*
+std::vector<CString> CSnakeDoc::RetrieveDatabase()
+{
+	std::vector<CString> data;
+
+	CoInitialize(NULL);
+	CComPtr<IXMLDOMDocument> spXmldoc;
+	HRESULT hr = spXmldoc.CoCreateInstance(L"MSXML2.DOMDocument.6.0");
+
+	if (SUCCEEDED(hr))
+	{
+		VARIANT_BOOL isSuccessful;
+		CComVariant varXmlFile(L"database.xml");
+
+		spXmldoc->put_async(VARIANT_FALSE);
+		HRESULT hr = spXmldoc->load(varXmlFile, &isSuccessful);
+
+		if (isSuccessful == VARIANT_TRUE)
+		{
+			CComBSTR bstrXml;
+			CComPtr<IXMLDOMElement> spRoot = NULL;
+			CComPtr<IXMLDOMElement> spRecord = NULL;
+			CComPtr<IXMLDOMElement> spScore = NULL;
+			CComPtr<IXMLDOMNode> spTheNode = NULL;
+
+			// KEY TO INCLUDE THE ROOT
+			hr = spXmldoc->get_documentElement(&spRoot);
+			spRoot->get_xml(&bstrXml);
+
+			for (int j = 0; j != 3; j++)
+			{
+				if (j == 0)
+					spRoot->selectSingleNode(L"/record/highest[@id='low']", &spTheNode);
+				else if (j == 1)
+					spRoot->selectSingleNode(L"/record/highest[@id='default']", &spTheNode);
+				else
+					spRoot->selectSingleNode(L"/record/highest[@id='high']", &spTheNode);
+
+				hr = spTheNode.QueryInterface(&spRecord);
+				spTheNode.Release();
+
+				spRecord->get_xml(&bstrXml);
+				CComPtr<IXMLDOMNodeList> spNodeList = NULL;
+				spRecord->get_childNodes(&spNodeList);
+
+				for (auto i = 0; i != 3; i++)
+				{
+					CComPtr<IXMLDOMNode> spListItem = NULL;
+					spNodeList->get_item(i, &spListItem);
+
+					if (spListItem)
+					{
+						spListItem->get_xml(&bstrXml);
+
+						VARIANT value;
+						hr = spListItem->get_nodeTypedValue(&value);
+						if (FAILED(hr))
+							throw "failed";
+
+						if (hr == S_OK)
+						{
+							CString s;
+							s = (CString)value.bstrVal;
+							VariantClear(&value);
+							data.push_back(s);
+						}
+					}
+				}	
+			}
+			spRecord.Release();
+			spRoot.Release();
+			bstrXml.Empty();
+			
+		}
+		varXmlFile.Clear();
+	}
+	spXmldoc.Release();
+	CoUninitialize();
+
+	return data;
+}
+*/
 
 void CSnakeDoc::UpdateDatabase()
 {

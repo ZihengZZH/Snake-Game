@@ -122,6 +122,9 @@
     <Image Include="res\Splash.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="res\trophy.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="database.xml">

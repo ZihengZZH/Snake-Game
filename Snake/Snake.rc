@@ -80,6 +80,8 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "&Save",                       ID_GAME_SAVE
         MENUITEM "&Open",                       ID_GAME_OPEN
+        MENUITEM SEPARATOR
+        MENUITEM "&Leaderboard",                ID_GAME_LEADERBOARD
     END
     POPUP "&Speed"
     BEGIN
@@ -378,6 +380,51 @@ IDB_BG_DARK             BITMAP                  "res\\background_dark.bmp"
 IDB_BG_LIGHT            BITMAP                  "res\\background_light.bmp"
 
 IDB_SPLASH              BITMAP                  "res\\Splash.bmp"
+
+IDB_LEADER              BITMAP                  "res\\trophy.bmp"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_LEADERBOX DIALOGEX 0, 0, 239, 180
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION " "
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_LEADERBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 232
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 173
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_LEADERBOX AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
 
 
 #ifdef APSTUDIO_INVOKED
