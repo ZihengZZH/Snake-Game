@@ -12,6 +12,8 @@
 #include "SnakeDoc.h"
 #include <propkey.h>
 
+#include <vector>
+#include <windows.h>
 #include <MsXml6.h>
 #include <comutil.h>
 #pragma comment(lib, "comsuppwd.lib")
@@ -52,6 +54,7 @@ CSnakeDoc::CSnakeDoc()
 	light.score.CreateSolidBrush(RGB(80, 46, 80));
 	light.food.CreateSolidBrush(RGB(255, 237, 131));
 	light.snake.CreateSolidBrush(RGB(100, 243, 120));
+	light.snake_head.CreateSolidBrush(RGB(92, 224, 110));
 	light.m_bg = "LIGHT";
 
 	// Define the dark theme
@@ -60,6 +63,7 @@ CSnakeDoc::CSnakeDoc()
 	dark.score.CreateSolidBrush(RGB(80, 46, 80));
 	dark.food.CreateSolidBrush(RGB(190, 175, 194));
 	dark.snake.CreateSolidBrush(RGB(129, 85, 186));
+	dark.snake_head.CreateSolidBrush(RGB(150, 110, 176));
 	dark.m_bg = "DARK";
 
 	// Define the default theme
@@ -69,6 +73,7 @@ CSnakeDoc::CSnakeDoc()
 	defalt.score.CreateSolidBrush(RGB(120, 160, 40));
 	defalt.food.CreateSolidBrush(RGB(255, 80, 80));
 	defalt.snake.CreateSolidBrush(RGB(51, 102, 255));
+	defalt.snake_head.CreateSolidBrush(RGB(36, 120, 190));
 	defalt.m_bg = "DEFAULT";
 
 	current = &defalt;
@@ -88,6 +93,7 @@ CSnakeDoc::~CSnakeDoc()
 UINT CSnakeDoc::RetrieveDatabase()
 {
 	UINT m_old;
+	//std::vector<CString> m_old_record;
 
 	CoInitialize(NULL);
 	CComPtr<IXMLDOMDocument> spXmldoc;
@@ -202,8 +208,10 @@ void CSnakeDoc::UpdateDatabase()
 
 			CComPtr<IXMLDOMNodeList> spNodeList = NULL;
 			CComPtr<IXMLDOMNode> spListItem = NULL;
+			CComPtr<IXMLDOMNode> spListTime = NULL;
 			spRecord->get_childNodes(&spNodeList);
 			spNodeList->get_item(1, &spListItem);
+			spNodeList->get_item(2, &spListTime);
 
 			if (spListItem)
 			{
@@ -225,9 +233,14 @@ void CSnakeDoc::UpdateDatabase()
 					UINT m_new = new_highest;
 					if (m_new > m_old)
 					{
-						CString m_new_str;
+						CString m_new_str, m_time_str;
 						m_new_str.Format(_T("%u"), m_new);
 						spListItem->put_text(m_new_str.AllocSysString());
+						SYSTEMTIME sys;
+						GetLocalTime(&sys);
+						m_time_str.Format(_T("%4d/%02d/%02d %02d:%02d:%02d.%03d"), 
+							sys.wYear, sys.wMonth, sys.wDay, sys.wHour, sys.wMinute, sys.wSecond, sys.wMilliseconds);
+						spListTime->put_text(m_time_str.AllocSysString());
 					}
 				}
 			}

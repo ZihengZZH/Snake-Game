@@ -46,7 +46,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	wndSplash.Create(IDB_SPLASH);
 	wndSplash.CenterWindow();
 	wndSplash.UpdateWindow();
-	Sleep(2500);
+	Sleep(2000);
 	wndSplash.DestroyWindow();
 
 	if (CFrameWnd::OnCreate(lpCreateStruct) == -1)

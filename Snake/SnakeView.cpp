@@ -68,6 +68,7 @@ void CSnakeView::OnDraw(CDC* pDC)
 	if (!pDoc)
 		return;
 
+	// Double buffering technique
 	CDC m_cacheDC;
 	CBitmap m_cacheCBitmap;
 
@@ -109,7 +110,10 @@ void CSnakeView::OnDraw(CDC* pDC)
 	{
 		SetRect(snake_rect, (*iter).x - 10, (*iter).y - 10,
 			(*iter).x + 10, (*iter).y + 10);
-		m_cacheDC.FillRect(snake_rect, &pDoc->current->snake);
+		if (iter == snake.snake_list.begin())
+			m_cacheDC.FillRect(snake_rect, &pDoc->current->snake_head);
+		else
+			m_cacheDC.FillRect(snake_rect, &pDoc->current->snake);
 		//pDC->FillRect(snake_rect, &pDoc->current->snake);
 	}
 
