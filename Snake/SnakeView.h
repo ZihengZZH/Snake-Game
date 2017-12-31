@@ -25,7 +25,6 @@ public:
 	CString highest;
 	UINT m_score;
 	UINT m_highest;
-	UINT m_speed;
 	CBitmap m_bg;
 	CBitmap m_bg_light;
 	CBitmap m_bg_dark;
@@ -34,7 +33,7 @@ public:
 	CRect m_food_rect;
 	CRect m_trophy_rect;
 	CFont m_font;
-
+	BOOL m_pause;
 
 // Operations
 public:

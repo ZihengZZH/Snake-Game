@@ -10,6 +10,8 @@
 #endif
 
 #include "SnakeDoc.h"
+#include "SnakeView.h"
+#include "CSnake.h"
 #include <propkey.h>
 
 #include <windows.h>
@@ -38,8 +40,6 @@ BEGIN_MESSAGE_MAP(CSnakeDoc, CDocument)
 	ON_UPDATE_COMMAND_UI(ID_SPEED_LOW, &CSnakeDoc::OnUpdateSpeedLow)
 	ON_UPDATE_COMMAND_UI(ID_SPEED_DEFAULT, &CSnakeDoc::OnUpdateSpeedDefault)
 	ON_UPDATE_COMMAND_UI(ID_SPEED_HIGH, &CSnakeDoc::OnUpdateSpeedHigh)
-	ON_COMMAND(ID_GAME_SAVE, &CSnakeDoc::OnGameSave)
-	ON_COMMAND(ID_GAME_OPEN, &CSnakeDoc::OnGameOpen)
 END_MESSAGE_MAP()
 
 
@@ -82,12 +82,14 @@ CSnakeDoc::CSnakeDoc()
 	speed_default = 150;
 	speed_high = 50;
 	speed_current = &speed_default;
-
+	
 }
+
 
 CSnakeDoc::~CSnakeDoc()
 {
 }
+
 
 UINT CSnakeDoc::RetrieveHighest()
 {
@@ -166,88 +168,6 @@ UINT CSnakeDoc::RetrieveHighest()
 	return m_old;
 }
 
-/*
-std::vector<CString> CSnakeDoc::RetrieveDatabase()
-{
-	std::vector<CString> data;
-
-	CoInitialize(NULL);
-	CComPtr<IXMLDOMDocument> spXmldoc;
-	HRESULT hr = spXmldoc.CoCreateInstance(L"MSXML2.DOMDocument.6.0");
-
-	if (SUCCEEDED(hr))
-	{
-		VARIANT_BOOL isSuccessful;
-		CComVariant varXmlFile(L"database.xml");
-
-		spXmldoc->put_async(VARIANT_FALSE);
-		HRESULT hr = spXmldoc->load(varXmlFile, &isSuccessful);
-
-		if (isSuccessful == VARIANT_TRUE)
-		{
-			CComBSTR bstrXml;
-			CComPtr<IXMLDOMElement> spRoot = NULL;
-			CComPtr<IXMLDOMElement> spRecord = NULL;
-			CComPtr<IXMLDOMElement> spScore = NULL;
-			CComPtr<IXMLDOMNode> spTheNode = NULL;
-
-			// KEY TO INCLUDE THE ROOT
-			hr = spXmldoc->get_documentElement(&spRoot);
-			spRoot->get_xml(&bstrXml);
-
-			for (int j = 0; j != 3; j++)
-			{
-				if (j == 0)
-					spRoot->selectSingleNode(L"/record/highest[@id='low']", &spTheNode);
-				else if (j == 1)
-					spRoot->selectSingleNode(L"/record/highest[@id='default']", &spTheNode);
-				else
-					spRoot->selectSingleNode(L"/record/highest[@id='high']", &spTheNode);
-
-				hr = spTheNode.QueryInterface(&spRecord);
-				spTheNode.Release();
-
-				spRecord->get_xml(&bstrXml);
-				CComPtr<IXMLDOMNodeList> spNodeList = NULL;
-				spRecord->get_childNodes(&spNodeList);
-
-				for (auto i = 0; i != 3; i++)
-				{
-					CComPtr<IXMLDOMNode> spListItem = NULL;
-					spNodeList->get_item(i, &spListItem);
-
-					if (spListItem)
-					{
-						spListItem->get_xml(&bstrXml);
-
-						VARIANT value;
-						hr = spListItem->get_nodeTypedValue(&value);
-						if (FAILED(hr))
-							throw "failed";
-
-						if (hr == S_OK)
-						{
-							CString s;
-							s = (CString)value.bstrVal;
-							VariantClear(&value);
-							data.push_back(s);
-						}
-					}
-				}	
-			}
-			spRecord.Release();
-			spRoot.Release();
-			bstrXml.Empty();
-			
-		}
-		varXmlFile.Clear();
-	}
-	spXmldoc.Release();
-	CoUninitialize();
-
-	return data;
-}
-*/
 
 void CSnakeDoc::UpdateDatabase()
 {
@@ -339,6 +259,7 @@ void CSnakeDoc::UpdateDatabase()
 	CoUninitialize();
 }
 
+
 BOOL CSnakeDoc::OnNewDocument()
 {
 	if (!CDocument::OnNewDocument())
@@ -357,13 +278,16 @@ BOOL CSnakeDoc::OnNewDocument()
 
 void CSnakeDoc::Serialize(CArchive& ar)
 {
+	CFrameWndEx *pMain = (CFrameWndEx *)AfxGetMainWnd();
+	CSnakeView *pView = (CSnakeView *)pMain->GetActiveView();
+
 	if (ar.IsStoring())
 	{
-		// TODO: add storing code here
+		pView->snake.Serialize(ar);
 	}
 	else
 	{
-		// TODO: add loading code here
+		pView->snake.Serialize(ar);
 	}
 }
 
@@ -511,15 +435,45 @@ void CSnakeDoc::OnUpdateSpeedHigh(CCmdUI *pCmdUI)
 }
 
 
-
-
+/*
 void CSnakeDoc::OnGameSave()
 {
-	// TODO: Add your command handler code here
+	CFileException fe;
+	CFile *pFile = GetFile(_T("database.txt"),
+		CFile::modeCreate | CFile::modeWrite | CFile::shareDenyWrite, &fe);
+	DeleteContents();
+	SetModifiedFlag();
+
+	CArchive saveArchive(pFile, CArchive::store);
+	saveArchive.m_pDocument = this;
+	saveArchive.m_bForceFlat = FALSE;
+
+	CWaitCursor wait;
+	if (pFile->GetLength() != 0)
+		Serialize(saveArchive);
+
+	saveArchive.Close();
+	ReleaseFile(pFile, FALSE);
 }
 
 
 void CSnakeDoc::OnGameOpen()
 {
-	// TODO: Add your command handler code here
+	CFileException fe;
+	CFile *pFile = GetFile(_T("database.txt"),
+		CFile::modeRead | CFile::shareDenyWrite, &fe);
+	DeleteContents();
+	SetModifiedFlag();
+
+	CArchive loadArchive(pFile, CArchive::load);
+	loadArchive.m_pDocument = this;
+	loadArchive.m_bForceFlat = FALSE;
+
+	CWaitCursor wait;
+	if (pFile->GetLength() != 0)
+		Serialize(loadArchive);
+
+	loadArchive.Close();
+	ReleaseFile(pFile, FALSE);
 }
+*/

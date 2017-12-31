@@ -78,10 +78,8 @@ BEGIN
         MENUITEM "&Continue",                   ID_GAME_CONTINUE
         MENUITEM "&Stop",                       ID_GAME_STOP
         MENUITEM SEPARATOR
-        MENUITEM "&Save",                       ID_GAME_SAVE
-        MENUITEM "&Open",                       ID_GAME_OPEN
-        MENUITEM SEPARATOR
-        MENUITEM "&Leaderboard",                ID_GAME_LEADERBOARD
+        MENUITEM "&Save",                       ID_FILE_SAVE
+        MENUITEM "&Open",                       ID_FILE_OPEN
     END
     POPUP "&Speed"
     BEGIN
@@ -393,13 +391,6 @@ IDB_LEADER              BITMAP                  "res\\trophy.bmp"
 // Dialog
 //
 
-IDD_LEADERBOX DIALOGEX 0, 0, 239, 180
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION " "
-FONT 8, "MS Shell Dlg", 400, 0, 0x1
-BEGIN
-END
-
 IDD_KEYBOX DIALOGEX 0, 0, 293, 130
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "DirectionKey"
@@ -420,14 +411,6 @@ END
 #ifdef APSTUDIO_INVOKED
 GUIDELINES DESIGNINFO
 BEGIN
-    IDD_LEADERBOX, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 232
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 173
-    END
-
     IDD_KEYBOX, DIALOG
     BEGIN
         LEFTMARGIN, 7
@@ -443,11 +426,6 @@ END
 //
 // AFX_DIALOG_LAYOUT
 //
-
-IDD_LEADERBOX AFX_DIALOG_LAYOUT
-BEGIN
-    0
-END
 
 IDD_KEYBOX AFX_DIALOG_LAYOUT
 BEGIN

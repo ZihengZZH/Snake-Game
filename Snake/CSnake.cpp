@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CSnake.h"
 
+IMPLEMENT_SERIAL(Snake, CObject, 1)
 
 // The original length of the snake is 3
 Snake::Snake()
@@ -15,11 +16,44 @@ Snake::Snake()
 	default_state = snake_list;
 	direction = RIGHT;
 	is_food = FALSE;
+	speed = 150;
 }
 
 
 Snake::~Snake()
 {
+}
+
+void Snake::Serialize(CArchive & ar)
+{
+	if (ar.IsLoading())
+	{
+		int size;
+		ar >> size;
+		CPoint point;
+		for (int i = 0; i < size; i++)
+		{
+			ar >> point;
+			snake_list.push_back(point);
+		}
+		ar >> food;
+		ar >> direction;
+		ar >> is_food;
+		ar >> speed;
+	}
+	else if (ar.IsStoring())
+	{
+		int size = snake_list.size();
+		ar << size;
+		for (auto snake_lst : snake_list)
+		{
+			ar << snake_lst;
+		}
+		ar << food;
+		ar << direction;
+		ar << is_food;
+		ar << speed;
+	}
 }
 
 BOOL Snake::move()

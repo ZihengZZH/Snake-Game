@@ -17,7 +17,6 @@
 #define IDB_BG_LIGHT                    322
 #define IDB_FOOD                        324
 #define IDB_SPLASH                      325
-#define IDD_LEADERBOX                   328
 #define IDB_LEADER                      330
 #define IDD_KEYBOX                      331
 #define IDC_STATIC_ICON                 1000

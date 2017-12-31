@@ -4,8 +4,7 @@
 
 
 #pragma once
-
-#include <vector>
+#include "CSnake.h"
 
 
 class CSnakeDoc : public CDocument
@@ -16,6 +15,7 @@ protected: // create from serialization only
 
 // Attributes
 public:
+	//Snake snake;
 	struct m_theme
 	{
 		CBrush bg;
@@ -83,6 +83,4 @@ public:
 	afx_msg void OnUpdateSpeedLow(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateSpeedDefault(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateSpeedHigh(CCmdUI *pCmdUI);
-	afx_msg void OnGameSave();
-	afx_msg void OnGameOpen();
 };

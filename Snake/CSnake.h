@@ -17,6 +17,8 @@ using namespace std;
 
 class Snake : public CObject
 {
+	DECLARE_SERIAL(Snake);
+
 private:
 	UINT direction;
 	BOOL is_food;
@@ -25,10 +27,14 @@ public:
 	vector<CPoint> snake_list;
 	vector<CPoint> default_state;
 	CPoint food;
+	UINT speed;
 
 public:
 	Snake();
-	~Snake();
+	virtual ~Snake();
+	virtual void Serialize(CArchive& ar);
+
+public:
 	BOOL move();
 	BOOL isDied();
 	void generateFood();

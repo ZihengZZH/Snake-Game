@@ -27,7 +27,6 @@ public:
 
 // Implementation
 	afx_msg void OnAppAbout();
-	afx_msg void OnLeaderAbout();
 	afx_msg void OnKeyAbout();
 	DECLARE_MESSAGE_MAP()
 };

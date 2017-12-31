@@ -38,7 +38,7 @@ CSnakeView::CSnakeView()
 {
 	m_score = 0;
 	m_highest = 0;
-	m_speed = 100;
+	m_pause = FALSE;
 }
 
 CSnakeView::~CSnakeView()
@@ -237,9 +237,9 @@ void CSnakeView::OnSTART()
 		return;
 
 	m_highest = pDoc->RetrieveHighest();
-	m_speed = *pDoc->speed_current;
+	snake.speed = *pDoc->speed_current;
 
-	SetTimer(1, m_speed, NULL); // speed depends on nElasp ms 
+	SetTimer(1, snake.speed, NULL); // speed depends on nElasp ms 
 	srand(time(NULL));
 	snake.generateFood();
 	snake.snake_list = snake.default_state;
@@ -291,18 +291,31 @@ void CSnakeView::OnTimer(UINT_PTR nIDEvent)
 
 void CSnakeView::OnGamePause()
 {
+	m_pause = TRUE;
 	KillTimer(1);
 }
 
 
 void CSnakeView::OnGameContinue()
 {
-	SetTimer(1, m_speed, NULL);
+	if (m_pause)
+		SetTimer(1, snake.speed, NULL);
 }
 
 
 void CSnakeView::OnGameStop()
 {
-	
+	m_pause = FALSE;
+	KillTimer(1);
+
+	CSnakeDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if (!pDoc)
+		return;
+
+	pDoc->new_highest = m_score;
+	pDoc->UpdateDatabase();
+
+	AfxMessageBox(_T("GAME STOPPED, PLEASE START OVER."));
 }
 
