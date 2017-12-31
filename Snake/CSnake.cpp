@@ -26,11 +26,14 @@ Snake::~Snake()
 
 void Snake::Serialize(CArchive & ar)
 {
+	CObject::Serialize(ar);
+
 	if (ar.IsLoading())
 	{
 		int size;
 		ar >> size;
 		CPoint point;
+		snake_list.clear();
 		for (int i = 0; i < size; i++)
 		{
 			ar >> point;

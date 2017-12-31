@@ -288,6 +288,7 @@ void CSnakeDoc::Serialize(CArchive& ar)
 	else
 	{
 		pView->snake.Serialize(ar);
+		pView->m_pause = TRUE;
 	}
 }
 
