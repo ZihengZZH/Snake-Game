@@ -91,6 +91,7 @@ CSnakeDoc::~CSnakeDoc()
 }
 
 
+// Function to retrieve the highest score from database
 UINT CSnakeDoc::RetrieveHighest()
 {
 	UINT m_old;
@@ -169,6 +170,7 @@ UINT CSnakeDoc::RetrieveHighest()
 }
 
 
+// Function to update the database
 void CSnakeDoc::UpdateDatabase()
 {
 	CoInitialize(NULL);
@@ -362,74 +364,75 @@ void CSnakeDoc::Dump(CDumpContext& dc) const
 
 
 // CSnakeDoc commands
+// Message handlers
 
-
+// Change to light theme
 void CSnakeDoc::OnThemeLight()
 {
 	current = &light;
 }
 
-
+// Change to dark theme
 void CSnakeDoc::OnThemeDark()
 {
 	current = &dark;
 }
 
-
+// Change to default theme
 void CSnakeDoc::OnThemeDefault()
 {
 	current = &defalt;
 }
 
-
+// Update the status of default theme
 void CSnakeDoc::OnUpdateThemeDefault(CCmdUI *pCmdUI)
 {
 	pCmdUI->SetCheck(current == &defalt);
 }
 
-
+// Update the status of light theme
 void CSnakeDoc::OnUpdateThemeLight(CCmdUI *pCmdUI)
 {
 	pCmdUI->SetCheck(current == &light);
 }
 
-
+// Update the status of dark theme
 void CSnakeDoc::OnUpdateThemeDark(CCmdUI *pCmdUI)
 {
 	pCmdUI->SetCheck(current == &dark);
 }
 
-
+// Change to low speed
 void CSnakeDoc::OnSpeedLow()
 {
 	speed_current = &speed_low;
 }
 
-
+// Change to default speed
 void CSnakeDoc::OnSpeedDefault()
 {
 	speed_current = &speed_default;
 }
 
-
+// Change to high speed
 void CSnakeDoc::OnSpeedHigh()
 {
 	speed_current = &speed_high;
 }
 
-
+// Update the status of low speed
 void CSnakeDoc::OnUpdateSpeedLow(CCmdUI *pCmdUI)
 {
 	pCmdUI->SetCheck(speed_current == &speed_low);
 }
 
-
+// Update the status of default speed
 void CSnakeDoc::OnUpdateSpeedDefault(CCmdUI *pCmdUI)
 {
 	pCmdUI->SetCheck(speed_current == &speed_default);
 }
 
-
+// Update the status of high speed
 void CSnakeDoc::OnUpdateSpeedHigh(CCmdUI *pCmdUI)
 {
 	pCmdUI->SetCheck(speed_current == &speed_high);

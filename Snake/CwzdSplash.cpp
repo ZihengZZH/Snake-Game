@@ -3,11 +3,13 @@
 
 IMPLEMENT_DYNAMIC(CwzdSplash, CWnd)
 
+
+// Default constructor
 CwzdSplash::CwzdSplash()
 {
 }
 
-
+// Default destructor
 CwzdSplash::~CwzdSplash()
 {
 }
@@ -21,6 +23,7 @@ END_MESSAGE_MAP()
 
 void CwzdSplash::Create(UINT nBitmapID)
 {
+	// Load the bitmap 
 	m_bitmap.LoadBitmap(nBitmapID);
 	BITMAP bitmap;
 	m_bitmap.GetBitmap(&bitmap);
@@ -40,7 +43,7 @@ void CwzdSplash::OnPaint()
 	CDC dcComp;
 	dcComp.CreateCompatibleDC(&dc);
 	dcComp.SelectObject(&m_bitmap);
-	// draw bitmap
+	// draw bitmap in the center of the screen
 	dc.BitBlt(0, 0, bitmap.bmWidth, bitmap.bmHeight, &dcComp, 0, 0, SRCCOPY);
 }
 

@@ -14,26 +14,39 @@ protected: // create from serialization only
 
 // Attributes
 public:
-	Snake snake;
+	Snake snake; // Snake object
+
 	CRect window_rect;
 	CRect game_rect;
 	CRect score_rect;
 	CRect highest_rect;
 	CRect food_rect;
 	CRect snake_rect;
+	// All the rectangles for drawing
+
 	CString score;
 	CString highest;
+	// String for two scores
+
 	UINT m_score;
 	UINT m_highest;
+	// Integer for two scores
+
 	CBitmap m_bg;
 	CBitmap m_bg_light;
 	CBitmap m_bg_dark;
+	// Three different background
+
 	CImage m_food;
 	CImage m_trophy;
+	// Two image for display
+
 	CRect m_food_rect;
 	CRect m_trophy_rect;
-	CFont m_font;
-	BOOL m_pause;
+	// Two rectangles for above two images
+
+	CFont m_font; // new font for drawing 
+	BOOL m_pause; // if the game is paused
 
 // Operations
 public:

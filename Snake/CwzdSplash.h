@@ -1,5 +1,6 @@
 #pragma once
 
+// Class for splash that is displayed before the application
 class CwzdSplash : public CWnd
 {
 	DECLARE_DYNAMIC(CwzdSplash)
@@ -8,7 +9,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 public:
-	CBitmap m_bitmap;
+	CBitmap m_bitmap; // the bitmap for displaying
 
 public:
 	CwzdSplash();

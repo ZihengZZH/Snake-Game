@@ -15,7 +15,6 @@ protected: // create from serialization only
 
 // Attributes
 public:
-	//Snake snake;
 	struct m_theme
 	{
 		CBrush bg;
@@ -24,23 +23,24 @@ public:
 		CBrush snake;
 		CBrush snake_head;
 		CString m_bg;
-	};
+	}; // theme structure
 	m_theme light;
 	m_theme dark;
 	m_theme defalt;
 	m_theme *current;
+	// All the theme attributes
 	UINT speed_low;
 	UINT speed_default;
 	UINT speed_high;
 	UINT *speed_current;
-	UINT new_highest;
+	// All the speed attributes
+	UINT new_highest; // new highest score
 
 
 // Operations
 public:
-	UINT RetrieveHighest();
-	//std::vector<CString> RetrieveDatabase();
-	void UpdateDatabase();
+	UINT RetrieveHighest(); // Function to retrieve the highest score from database
+	void UpdateDatabase(); // Function to update the database
 
 
 // Overrides

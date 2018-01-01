@@ -48,6 +48,7 @@ CSnakeView::~CSnakeView()
 BOOL CSnakeView::PreCreateWindow(CREATESTRUCT& cs)
 {
 	
+	// All the image attributes load images
 	m_bg.LoadBitmap(IDB_BG);
 	m_bg_light.LoadBitmap(IDB_BG_LIGHT);
 	m_bg_dark.LoadBitmap(IDB_BG_DARK);
@@ -157,6 +158,7 @@ void CSnakeView::OnDraw(CDC* pDC)
 	m_cacheDC.SetTextColor(RGB(255, 255, 255));
 	m_cacheDC.DrawText(highest, -1, highest_rect, DT_CENTER | DT_SINGLELINE | DT_NOPREFIX | DT_VCENTER | DT_END_ELLIPSIS);
 
+	// Draw the cacheDC to the window
 	pDC->BitBlt(0, 0, 620 + 120, 775 + 120, &m_cacheDC, 0, 0, SRCCOPY);
 
 }
@@ -229,6 +231,8 @@ void CSnakeView::OnRight()
 		snake.changeDirection(RIGHT);
 }
 
+
+// START the game the set the timer
 void CSnakeView::OnSTART()
 {
 	CSnakeDoc* pDoc = GetDocument();
@@ -245,6 +249,8 @@ void CSnakeView::OnSTART()
 	snake.snake_list = snake.default_state;
 }
 
+
+// Respond to the key press
 void CSnakeView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 	switch (nChar)
@@ -269,6 +275,7 @@ void CSnakeView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 }
 
 
+// STOP the game and kill the timer
 void CSnakeView::OnTimer(UINT_PTR nIDEvent)
 {
 	CSnakeDoc* pDoc = GetDocument();
@@ -289,6 +296,7 @@ void CSnakeView::OnTimer(UINT_PTR nIDEvent)
 }
 
 
+// Pause the game and kill the timer
 void CSnakeView::OnGamePause()
 {
 	m_pause = TRUE;
@@ -296,6 +304,7 @@ void CSnakeView::OnGamePause()
 }
 
 
+// Continue the game and set the timer
 void CSnakeView::OnGameContinue()
 {
 	if (m_pause)
@@ -303,6 +312,7 @@ void CSnakeView::OnGameContinue()
 }
 
 
+// Stop the game and kill the timer
 void CSnakeView::OnGameStop()
 {
 	m_pause = FALSE;

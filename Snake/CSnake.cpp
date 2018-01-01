@@ -3,7 +3,7 @@
 
 IMPLEMENT_SERIAL(Snake, CObject, 1)
 
-// The original length of the snake is 3
+// Default constructor
 Snake::Snake()
 {
 	CPoint point;
@@ -11,7 +11,9 @@ Snake::Snake()
 	snake_list.push_back(point);
 	snake_list.push_back(*(snake_list.end() - 1));
 	snake_list.push_back(*(snake_list.end() - 1));
+	// The original length of the snake is 3
 	
+	// All the default status
 	food = point;
 	default_state = snake_list;
 	direction = RIGHT;
@@ -20,10 +22,13 @@ Snake::Snake()
 }
 
 
+// Default Destructor
 Snake::~Snake()
 {
 }
 
+
+// Serialization into stream
 void Snake::Serialize(CArchive & ar)
 {
 	CObject::Serialize(ar);
@@ -59,6 +64,8 @@ void Snake::Serialize(CArchive & ar)
 	}
 }
 
+
+// Function to move the snake and determine if died
 BOOL Snake::move()
 {
 	CPoint point;
@@ -116,11 +123,15 @@ BOOL Snake::move()
 	return TRUE;
 }
 
+
+// Function to return if the snake is died
 BOOL Snake::isDied()
 {
 	return FALSE;
 }
 
+
+// Function to generate the food randomly
 void Snake::generateFood()
 {
 	BOOL overlap = TRUE;
@@ -152,21 +163,29 @@ void Snake::generateFood()
 	food = CPoint(point);
 }
 
+
+// Function to change the direction
 void Snake::changeDirection(UINT ndir)
 {
 	direction = ndir;
 }
 
+
+// Function to get the direction
 UINT Snake::getDirection()
 {
 	return direction;
 }
 
+
+// Function to return the attribute
 BOOL Snake::isFood()
 {
 	return is_food;
 }
 
+
+// Function to set if the snake eats the food
 void Snake::setFood(BOOL n)
 {
 	is_food = n;

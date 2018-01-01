@@ -15,19 +15,20 @@ using namespace std;
 #define HEIGHT 600
 #define WIDTH 600
 
+// Snake class to manipulate the snake object
 class Snake : public CObject
 {
 	DECLARE_SERIAL(Snake);
 
 private:
-	UINT direction;
-	BOOL is_food;
+	UINT direction; // direction of the snake
+	BOOL is_food; // if the snake eats the food
 
 public:
-	vector<CPoint> snake_list;
-	vector<CPoint> default_state;
-	CPoint food;
-	UINT speed;
+	vector<CPoint> snake_list; // snake body
+	vector<CPoint> default_state; // default state
+	CPoint food; // food
+	UINT speed; // speed of the snake
 
 public:
 	Snake();
@@ -35,13 +36,13 @@ public:
 	virtual void Serialize(CArchive& ar);
 
 public:
-	BOOL move();
-	BOOL isDied();
-	void generateFood();
-	void changeDirection(UINT);
-	UINT getDirection();
-	BOOL isFood();
-	void setFood(BOOL);
+	BOOL move(); // Function to move the snake and determine if died
+	BOOL isDied(); // Function to return if the snake is died
+	void generateFood(); // Function to generate the food randomly
+	void changeDirection(UINT); // Function to change the direction
+	UINT getDirection(); // Function to get the direction
+	BOOL isFood(); // Function to return the attribute
+	void setFood(BOOL); // Function to set if the snake eats the food
 
 };
 

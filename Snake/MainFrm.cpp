@@ -41,12 +41,12 @@ CMainFrame::~CMainFrame()
 
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
-
+	// Display the splash before the application
 	CwzdSplash wndSplash;
 	wndSplash.Create(IDB_SPLASH);
 	wndSplash.CenterWindow();
 	wndSplash.UpdateWindow();
-	Sleep(2000);
+	Sleep(3500);
 	wndSplash.DestroyWindow();
 
 	if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
