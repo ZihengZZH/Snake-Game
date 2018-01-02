@@ -52,8 +52,9 @@ BOOL CSnakeView::PreCreateWindow(CREATESTRUCT& cs)
 	m_bg.LoadBitmap(IDB_BG);
 	m_bg_light.LoadBitmap(IDB_BG_LIGHT);
 	m_bg_dark.LoadBitmap(IDB_BG_DARK);
-	m_food.Load(_T("res//apple.png"));
-	m_trophy.Load(_T("res//trophy.png"));
+	// Absolute path
+	m_food.Load(_T("C://Users//Ziheng//Documents//Visual Studio 2017//Projects//MFC_Snake//Snake//res//apple.png"));
+	m_trophy.Load(_T("C://Users//Ziheng//Documents//Visual Studio 2017//Projects//MFC_Snake//Snake//res//trophy.png"));
 
 	// Set the font for score display
 	m_font.CreatePointFont(180, L"Century Gothic"); // Small Fonts

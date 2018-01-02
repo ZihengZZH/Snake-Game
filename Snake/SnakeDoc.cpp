@@ -103,7 +103,8 @@ UINT CSnakeDoc::RetrieveHighest()
 	if (SUCCEEDED(hr))
 	{
 		VARIANT_BOOL isSuccessful;
-		CComVariant varXmlFile(L"database.xml");
+		CComVariant varXmlFile(L"C://Users//Ziheng//Documents//Visual Studio 2017//Projects//MFC_Snake//Snake//database.xml");
+		// Absolute path
 
 		spXmldoc->put_async(VARIANT_FALSE);
 		HRESULT hr = spXmldoc->load(varXmlFile, &isSuccessful);
@@ -180,7 +181,8 @@ void CSnakeDoc::UpdateDatabase()
 	if (SUCCEEDED(hr))
 	{
 		VARIANT_BOOL isSuccessful;
-		CComVariant varXmlFile(L"database.xml");
+		CComVariant varXmlFile(L"C://Users//Ziheng//Documents//Visual Studio 2017//Projects//MFC_Snake//Snake//database.xml");
+		// Absolute path
 
 		spXmldoc->put_async(VARIANT_FALSE);
 		HRESULT hr = spXmldoc->load(varXmlFile, &isSuccessful);

@@ -60,6 +60,7 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 	if( !CFrameWnd::PreCreateWindow(cs) )
 		return FALSE;
 
+	// Initialize the window size
 	// Disable the maximum button
 	cs.style = WS_OVERLAPPED | WS_CAPTION | FWS_ADDTOTITLE 
 		| WS_MINIMIZEBOX | WS_SYSMENU;
