@@ -22,10 +22,12 @@ public:
 	CRect highest_rect;
 	CRect food_rect;
 	CRect snake_rect;
+	CRect info_rect;
 	// All the rectangles for drawing
 
 	CString score;
 	CString highest;
+	CString info;
 	// String for two scores
 
 	UINT m_score;
@@ -47,6 +49,7 @@ public:
 
 	CFont m_font; // new font for drawing 
 	BOOL m_pause; // if the game is paused
+	BOOL m_died; // if the snake the died
 
 // Operations
 public:

@@ -2,13 +2,13 @@
 <record>
 	<highest id="low">
 		<level>low</level>
-		<score>4</score>
-		<time></time>
+		<score>5</score>
+		<time>2018/01/02 17:16:54.576</time>
 	</highest>
 	<highest id="default">
 		<level>default</level>
-		<score>11</score>
-		<time>2017/12/30 21:42:54.752</time>
+		<score>14</score>
+		<time>2018/01/15 22:15:04.585</time>
 	</highest>
 	<highest id="high">
 		<level>high</level>

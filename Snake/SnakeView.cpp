@@ -39,6 +39,7 @@ CSnakeView::CSnakeView()
 	m_score = 0;
 	m_highest = 0;
 	m_pause = FALSE;
+	m_died = TRUE;
 }
 
 CSnakeView::~CSnakeView()
@@ -100,24 +101,37 @@ void CSnakeView::OnDraw(CDC* pDC)
 	m_cacheDC.BitBlt(BORDER, BORDER, WIDTH + BORDER, HEIGHT + BORDER, &m_bgcDC, 0, 0, SRCCOPY);
 	//pDC->BitBlt(BORDER, BORDER, WIDTH+BORDER, HEIGHT+BORDER, &m_bgcDC, 0, 0, SRCCOPY);
 	
-	// Draw the food rectangle
-	SetRect(food_rect, snake.food.x - 10, snake.food.y - 10,
-		snake.food.x + 10, snake.food.y + 10);
-	//m_food.Draw(*pDC, food_rect);
-	m_cacheDC.FillRect(food_rect, &pDoc->current->food);
-	//pDC->FillRect(food_rect, &pDoc->current->food);
-	
-	// Draw the snake rectangle
-	for (vector<CPoint>::iterator iter = snake.snake_list.begin(); 
-		iter != snake.snake_list.end(); ++iter) 
+	if (!m_died)
 	{
-		SetRect(snake_rect, (*iter).x - 10, (*iter).y - 10,
-			(*iter).x + 10, (*iter).y + 10);
-		if (iter == snake.snake_list.begin())
-			m_cacheDC.FillRect(snake_rect, &pDoc->current->snake_head);
-		else
-			m_cacheDC.FillRect(snake_rect, &pDoc->current->snake);
-		//pDC->FillRect(snake_rect, &pDoc->current->snake);
+		// Draw the food rectangle
+		SetRect(food_rect, snake.food.x - 10, snake.food.y - 10,
+			snake.food.x + 10, snake.food.y + 10);
+		//m_food.Draw(*pDC, food_rect);
+		m_cacheDC.FillRect(food_rect, &pDoc->current->food);
+		//pDC->FillRect(food_rect, &pDoc->current->food);
+
+		// Draw the snake rectangle
+		for (vector<CPoint>::iterator iter = snake.snake_list.begin();
+			iter != snake.snake_list.end(); ++iter)
+		{
+			SetRect(snake_rect, (*iter).x - 10, (*iter).y - 10,
+				(*iter).x + 10, (*iter).y + 10);
+			if (iter == snake.snake_list.begin())
+				m_cacheDC.FillRect(snake_rect, &pDoc->current->snake_head);
+			else
+				m_cacheDC.FillRect(snake_rect, &pDoc->current->snake);
+			//pDC->FillRect(snake_rect, &pDoc->current->snake);
+		}
+	}
+	else
+	{
+		// Information for the user at the beginning
+		SetRect(info_rect,80,200,640,350);
+		info.Format(_T("PLEASE PRESS NEW GAME TO START\nYOU MAY CHOOSE THE SPEED\nYOU MAY ALSO CHOOSE THE THEME"));
+		m_cacheDC.SelectObject(m_font);
+		m_cacheDC.SetBkMode(TRANSPARENT);
+		m_cacheDC.SetTextColor(RGB(255, 255, 255));
+		m_cacheDC.DrawText(info, -1, info_rect, DT_CENTER | DT_NOPREFIX | DT_VCENTER | DT_END_ELLIPSIS);
 	}
 
 	m_score = -3 + snake.snake_list.size();
@@ -142,19 +156,19 @@ void CSnakeView::OnDraw(CDC* pDC)
 
 	// Score string
 	score.Format(_T("%d"), m_score);
-	//pDC->SelectObject(GetStockObject(SYSTEM_FONT));
+	/*pDC->SelectObject(GetStockObject(SYSTEM_FONT));
 	//pDC->SelectObject(m_font);
 	//pDC->SetTextColor(RGB(255,255,255));
-	//pDC->DrawText(score, -1, score_rect, DT_CENTER | DT_SINGLELINE | DT_NOPREFIX | DT_VCENTER | DT_END_ELLIPSIS);
+	pDC->DrawText(score, -1, score_rect, DT_CENTER | DT_SINGLELINE | DT_NOPREFIX | DT_VCENTER | DT_END_ELLIPSIS);*/
 	m_cacheDC.SelectObject(m_font);
 	m_cacheDC.SetTextColor(RGB(255, 255, 255));
 	m_cacheDC.DrawText(score, -1, score_rect, DT_CENTER | DT_SINGLELINE | DT_NOPREFIX | DT_VCENTER | DT_END_ELLIPSIS);
 
 	// Highest score string
 	highest.Format(_T("%d"), m_highest);
-	//pDC->SelectObject(m_font);
+	/*pDC->SelectObject(m_font);
 	//pDC->SetTextColor(RGB(255, 255, 255));
-	//pDC->DrawText(highest, -1, highest_rect, DT_CENTER | DT_SINGLELINE | DT_NOPREFIX | DT_VCENTER | DT_END_ELLIPSIS);
+	pDC->DrawText(highest, -1, highest_rect, DT_CENTER | DT_SINGLELINE | DT_NOPREFIX | DT_VCENTER | DT_END_ELLIPSIS);*/
 	m_cacheDC.SelectObject(m_font);
 	m_cacheDC.SetTextColor(RGB(255, 255, 255));
 	m_cacheDC.DrawText(highest, -1, highest_rect, DT_CENTER | DT_SINGLELINE | DT_NOPREFIX | DT_VCENTER | DT_END_ELLIPSIS);
@@ -243,6 +257,7 @@ void CSnakeView::OnSTART()
 
 	m_highest = pDoc->RetrieveHighest();
 	snake.speed = *pDoc->speed_current;
+	m_died = FALSE;
 
 	SetTimer(1, snake.speed, NULL); // speed depends on nElasp ms 
 	srand(time(NULL));
@@ -287,6 +302,7 @@ void CSnakeView::OnTimer(UINT_PTR nIDEvent)
 	if (snake.move() != TRUE) 
 	{
 		KillTimer(nIDEvent);
+		m_died = TRUE;
 		pDoc->new_highest = m_score;
 		pDoc->UpdateDatabase();
 		AfxMessageBox(_T("YOU DIED, PLEASE START OVER."));
