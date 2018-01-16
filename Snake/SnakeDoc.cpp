@@ -78,9 +78,9 @@ CSnakeDoc::CSnakeDoc()
 	current = &defalt;
 
 	// Smaller means higher speed
-	speed_low = 250;
+	speed_low = 200;
 	speed_default = 150;
-	speed_high = 50;
+	speed_high = 100;
 	speed_current = &speed_default;
 	
 }

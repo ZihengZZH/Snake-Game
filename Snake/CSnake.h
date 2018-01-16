@@ -29,6 +29,8 @@ public:
 	vector<CPoint> default_state; // default state
 	CPoint food; // food
 	UINT speed; // speed of the snake
+	UINT level; // level of the game
+	BOOL level_up; // if level up
 
 public:
 	Snake();
@@ -46,3 +48,12 @@ public:
 
 };
 
+
+/*
+The LEVEL is increasing as the score goes up, 
+which means some scores indicate one level and so do others.
+However, the intervals between adjacent levels (scores) are different.
+And the interval of scores also increases as 10, 20, 30, 40, 50, 60 etc.
+So the pivots of levels are as follows:
+	10	20	40	70	110  160  ......
+*/

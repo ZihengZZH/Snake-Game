@@ -59,6 +59,9 @@ BOOL CSnakeView::PreCreateWindow(CREATESTRUCT& cs)
 
 	// Set the font for score display
 	m_font.CreatePointFont(180, L"Century Gothic"); // Small Fonts
+	m_info_font.CreatePointFont(220, L"Arial");
+
+	m_count = 0;
 
 	return CView::PreCreateWindow(cs);
 }
@@ -82,11 +85,10 @@ void CSnakeView::OnDraw(CDC* pDC)
 	
 	CBitmap *pOldBit = m_cacheDC.SelectObject(&m_cacheCBitmap);
 
-	
 	// Draw the window background
 	SetRect(window_rect, 0, 0, 620 + 120, 775 + 120);
 	m_cacheDC.FillRect(window_rect, &pDoc->current->bg);
-	//pDC->FillRect(window_rect, &pDoc->current->bg);
+	/*pDC->FillRect(window_rect, &pDoc->current->bg);*/
 
 	// Draw the game background
 	CDC m_bgcDC;
@@ -99,16 +101,16 @@ void CSnakeView::OnDraw(CDC* pDC)
 	else if (pDoc->current->m_bg == "DARK")
 		m_bgcDC.SelectObject(&m_bg_dark);
 	m_cacheDC.BitBlt(BORDER, BORDER, WIDTH + BORDER, HEIGHT + BORDER, &m_bgcDC, 0, 0, SRCCOPY);
-	//pDC->BitBlt(BORDER, BORDER, WIDTH+BORDER, HEIGHT+BORDER, &m_bgcDC, 0, 0, SRCCOPY);
+	/*pDC->BitBlt(BORDER, BORDER, WIDTH+BORDER, HEIGHT+BORDER, &m_bgcDC, 0, 0, SRCCOPY);*/
 	
 	if (!m_died)
 	{
 		// Draw the food rectangle
 		SetRect(food_rect, snake.food.x - 10, snake.food.y - 10,
 			snake.food.x + 10, snake.food.y + 10);
-		//m_food.Draw(*pDC, food_rect);
+		/*m_food.Draw(*pDC, food_rect);*/
 		m_cacheDC.FillRect(food_rect, &pDoc->current->food);
-		//pDC->FillRect(food_rect, &pDoc->current->food);
+		/*pDC->FillRect(food_rect, &pDoc->current->food);*/
 
 		// Draw the snake rectangle
 		for (vector<CPoint>::iterator iter = snake.snake_list.begin();
@@ -120,31 +122,34 @@ void CSnakeView::OnDraw(CDC* pDC)
 				m_cacheDC.FillRect(snake_rect, &pDoc->current->snake_head);
 			else
 				m_cacheDC.FillRect(snake_rect, &pDoc->current->snake);
-			//pDC->FillRect(snake_rect, &pDoc->current->snake);
+			/*pDC->FillRect(snake_rect, &pDoc->current->snake);*/
 		}
 	}
 	else
 	{
 		// Information for the user at the beginning
 		SetRect(info_rect,80,200,640,350);
-		info.Format(_T("PLEASE PRESS NEW GAME TO START\nYOU MAY CHOOSE THE SPEED\nYOU MAY ALSO CHOOSE THE THEME"));
-		m_cacheDC.SelectObject(m_font);
+		info.Format(_T("PLEASE PRESS NEW GAME TO START"));
+		m_cacheDC.SelectObject(m_info_font);
+		//CBrush info_brush(RGB(50, 100, 255));
+		//m_cacheDC.FillRect(info_rect, &info_brush);
 		m_cacheDC.SetBkMode(TRANSPARENT);
 		m_cacheDC.SetTextColor(RGB(255, 255, 255));
 		m_cacheDC.DrawText(info, -1, info_rect, DT_CENTER | DT_NOPREFIX | DT_VCENTER | DT_END_ELLIPSIS);
 	}
 
 	m_score = -3 + snake.snake_list.size();
-
+	
 	// Draw the score region
 	SetRect(score_rect, BORDER*1.5, 0, WIDTH/4, BORDER);
 	SetRect(highest_rect, BORDER*2.5, 0, WIDTH/2, BORDER);
+	SetRect(level_rect, BORDER*3, 0, WIDTH, BORDER);
 	SetRect(m_food_rect, BORDER, 5, BORDER+40, 50);
 	SetRect(m_trophy_rect, BORDER+100, 10, BORDER+140, 50);
 	m_food.Draw(m_cacheDC, m_food_rect);
 	m_trophy.Draw(m_cacheDC, m_trophy_rect);
-	//m_food.Draw(*pDC, m_food_rect);
-	//m_trophy.Draw(*pDC, m_trophy_rect);
+	/*m_food.Draw(*pDC, m_food_rect);
+	m_trophy.Draw(*pDC, m_trophy_rect);*/
 	/*
 	There are still problems with the icon that will flicker.
 	Sometimes it might affect user experience.
@@ -152,7 +157,7 @@ void CSnakeView::OnDraw(CDC* pDC)
 	
 	// Transparent the background of text
 	m_cacheDC.SetBkMode(TRANSPARENT);
-	//pDC->SetBkMode(TRANSPARENT);
+	/*pDC->SetBkMode(TRANSPARENT);*/
 
 	// Score string
 	score.Format(_T("%d"), m_score);
@@ -173,6 +178,18 @@ void CSnakeView::OnDraw(CDC* pDC)
 	m_cacheDC.SetTextColor(RGB(255, 255, 255));
 	m_cacheDC.DrawText(highest, -1, highest_rect, DT_CENTER | DT_SINGLELINE | DT_NOPREFIX | DT_VCENTER | DT_END_ELLIPSIS);
 
+	// LevelUp string
+	if (snake.level_up || m_count > 0)
+	{
+		level.Format(_T("LEVEL UP! SPEED UP!"));
+		m_cacheDC.SelectObject(m_font);
+		m_cacheDC.SetTextColor(RGB(255, 255, 255));
+		m_cacheDC.DrawText(level, -1, level_rect, DT_CENTER | DT_SINGLELINE | DT_NOPREFIX | DT_VCENTER | DT_END_ELLIPSIS);
+		m_count++;
+		if (m_count == 10)
+			m_count = 0;
+	}
+	
 	// Draw the cacheDC to the window
 	pDC->BitBlt(0, 0, 620 + 120, 775 + 120, &m_cacheDC, 0, 0, SRCCOPY);
 
@@ -258,7 +275,7 @@ void CSnakeView::OnSTART()
 	m_highest = pDoc->RetrieveHighest();
 	snake.speed = *pDoc->speed_current;
 	m_died = FALSE;
-
+	
 	SetTimer(1, snake.speed, NULL); // speed depends on nElasp ms 
 	srand(time(NULL));
 	snake.generateFood();
@@ -298,6 +315,12 @@ void CSnakeView::OnTimer(UINT_PTR nIDEvent)
 	ASSERT_VALID(pDoc);
 	if (!pDoc)
 		return;
+
+	if (snake.level_up)
+	{
+		KillTimer(nIDEvent);
+		SetTimer(nIDEvent, snake.speed - snake.level * 5, NULL);
+	}
 
 	if (snake.move() != TRUE) 
 	{

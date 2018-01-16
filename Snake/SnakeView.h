@@ -18,20 +18,23 @@ public:
 
 	CRect window_rect;
 	CRect game_rect;
-	CRect score_rect;
-	CRect highest_rect;
 	CRect food_rect;
 	CRect snake_rect;
+	CRect score_rect;
+	CRect highest_rect;
+	CRect level_rect;
 	CRect info_rect;
 	// All the rectangles for drawing
 
 	CString score;
 	CString highest;
+	CString level;
 	CString info;
 	// String for two scores
 
 	UINT m_score;
 	UINT m_highest;
+	UINT m_count;
 	// Integer for two scores
 
 	CBitmap m_bg;
@@ -48,6 +51,7 @@ public:
 	// Two rectangles for above two images
 
 	CFont m_font; // new font for drawing 
+	CFont m_info_font; // new font for information
 	BOOL m_pause; // if the game is paused
 	BOOL m_died; // if the snake the died
 

@@ -18,7 +18,9 @@ Snake::Snake()
 	default_state = snake_list;
 	direction = RIGHT;
 	is_food = FALSE;
+	level_up = FALSE;
 	speed = 150;
+	level = 0;
 }
 
 
@@ -48,6 +50,7 @@ void Snake::Serialize(CArchive & ar)
 		ar >> direction;
 		ar >> is_food;
 		ar >> speed;
+		ar >> level;
 	}
 	else if (ar.IsStoring())
 	{
@@ -61,6 +64,7 @@ void Snake::Serialize(CArchive & ar)
 		ar << direction;
 		ar << is_food;
 		ar << speed;
+		ar << level;
 	}
 }
 
@@ -68,6 +72,8 @@ void Snake::Serialize(CArchive & ar)
 // Function to move the snake and determine if died
 BOOL Snake::move()
 {
+	level_up = FALSE;
+
 	CPoint point;
 	point = snake_list.front();
 
@@ -80,6 +86,7 @@ BOOL Snake::move()
 	else
 		point.x += 20;
 
+	// EAT the food
 	if (point == food)
 	{
 		snake_list.push_back(*(snake_list.end() - 1));
@@ -92,7 +99,14 @@ BOOL Snake::move()
 		snake_list.begin()->x = point.x;
 		snake_list.begin()->y = point.y;
 		generateFood();
+		UINT factor = 10 + 5 * level + 5 * level * level; // refers to header
+		if ((snake_list.size()-3) == factor)
+		{
+			level++;
+			level_up = TRUE;
+		}
 	}
+	// MISS the food
 	else
 	{
 		for (vector<CPoint>::iterator iter = snake_list.end() - 1;
@@ -105,6 +119,7 @@ BOOL Snake::move()
 		snake_list.begin()->y = point.y;
 	}
 
+	// snake is DIED
 	if (snake_list.front().x < BORDER || snake_list.front().x>WIDTH + BORDER ||
 		snake_list.front().y < BORDER || snake_list.front().y>HEIGHT + BORDER)
 	{
