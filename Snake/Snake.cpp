@@ -23,6 +23,7 @@
 BEGIN_MESSAGE_MAP(CSnakeApp, CWinApp)
 	ON_COMMAND(ID_APP_ABOUT, &CSnakeApp::OnAppAbout)
 	ON_COMMAND(ID_KEY_KEYCONTROL, &CSnakeApp::OnKeyAbout)
+	ON_COMMAND(ID_HELP_RULE, &CSnakeApp::OnRuleAbout)
 	// Standard file based document commands
 	ON_COMMAND(ID_FILE_NEW, &CWinApp::OnFileNew)
 	ON_COMMAND(ID_FILE_OPEN, &CWinApp::OnFileOpen)
@@ -312,6 +313,40 @@ void CKeyDlg::OnClickedUp()
 }
 
 
+// CRuleDlg dialog used for Game Rule
+
+class CRuleDlg : public CDialogEx
+{
+	//DECLARE_DYNAMIC(CRuleDlg)
+
+public:
+	enum { IDD = IDD_RULE };
+	CRuleDlg();
+	virtual ~CRuleDlg();
+
+protected:
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+
+	DECLARE_MESSAGE_MAP()
+};
+
+CRuleDlg::CRuleDlg() : CDialogEx(IDD_RULE)
+{
+}
+
+CRuleDlg::~CRuleDlg()
+{
+}
+
+void CRuleDlg::DoDataExchange(CDataExchange* pDX)
+{
+	CDialogEx::DoDataExchange(pDX);
+}
+
+BEGIN_MESSAGE_MAP(CRuleDlg, CDialogEx)
+END_MESSAGE_MAP()
+
+
 
 // App command to run the dialog
 void CSnakeApp::OnAppAbout()
@@ -326,6 +361,14 @@ void CSnakeApp::OnKeyAbout()
 	CKeyDlg keyDlg;
 	keyDlg.DoModal();
 }
+
+// App command to run the dialog
+void CSnakeApp::OnRuleAbout()
+{
+	CRuleDlg ruleDlg;
+	ruleDlg.DoModal();
+}
+
 
 
 // CSnakeApp message handlers

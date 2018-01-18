@@ -35,6 +35,7 @@ public:
 	UINT *speed_current;
 	// All the speed attributes
 	UINT new_highest; // new highest score
+	UINT new_level; // new highest level
 
 
 // Operations

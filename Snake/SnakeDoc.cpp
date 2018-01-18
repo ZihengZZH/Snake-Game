@@ -213,10 +213,12 @@ void CSnakeDoc::UpdateDatabase()
 
 			CComPtr<IXMLDOMNodeList> spNodeList = NULL;
 			CComPtr<IXMLDOMNode> spListItem = NULL;
+			CComPtr<IXMLDOMNode> spListLevel = NULL;
 			CComPtr<IXMLDOMNode> spListTime = NULL;
 			spRecord->get_childNodes(&spNodeList);
 			spNodeList->get_item(1, &spListItem);
-			spNodeList->get_item(2, &spListTime);
+			spNodeList->get_item(2, &spListLevel);
+			spNodeList->get_item(3, &spListTime);
 
 			if (spListItem)
 			{
@@ -238,9 +240,11 @@ void CSnakeDoc::UpdateDatabase()
 					UINT m_new = new_highest;
 					if (m_new > m_old)
 					{
-						CString m_new_str, m_time_str;
+						CString m_new_str, m_level_str, m_time_str;
 						m_new_str.Format(_T("%u"), m_new);
+						m_level_str.Format(_T("%u"), new_level);
 						spListItem->put_text(m_new_str.AllocSysString());
+						spListLevel->put_text(m_level_str.AllocSysString());
 						SYSTEMTIME sys;
 						GetLocalTime(&sys);
 						m_time_str.Format(_T("%4d/%02d/%02d %02d:%02d:%02d.%03d"), 

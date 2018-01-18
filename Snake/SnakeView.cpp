@@ -327,6 +327,7 @@ void CSnakeView::OnTimer(UINT_PTR nIDEvent)
 		KillTimer(nIDEvent);
 		m_died = TRUE;
 		pDoc->new_highest = m_score;
+		pDoc->new_level = snake.level;
 		pDoc->UpdateDatabase();
 		AfxMessageBox(_T("YOU DIED, PLEASE START OVER."));
 	}

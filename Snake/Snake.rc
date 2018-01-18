@@ -99,6 +99,7 @@ BEGIN
     END
     POPUP "&Help"
     BEGIN
+        MENUITEM "&Rule",                       ID_HELP_RULE
         MENUITEM "&About",                      ID_APP_ABOUT
     END
 END
@@ -402,6 +403,18 @@ BEGIN
     PUSHBUTTON      "LEFT",IDC_LEFT,39,69,68,38
 END
 
+IDD_RULE DIALOGEX 0, 0, 309, 176
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Game Rule"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "Game Rule",IDC_RULE,18,18,78,12
+    LTEXT           "1. The snake can be controlled by both keyboard and the button, which refers to the Key tab",IDC_RULE1,18,48,264,18
+    LTEXT           "2. When the snake reaches some point, the game level will increase and then the snake will be accerlated",IDC_RULE2,18,75,264,18
+    LTEXT           "3. The player may pause, continue or stop the game using Game tab",IDC_RULE3,18,102,220,8
+    LTEXT           "4. The player may change the game theme or the game speed",IDC_RULE4,18,119,200,8
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -418,6 +431,14 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 123
     END
+
+    IDD_RULE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 302
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 169
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -428,6 +449,11 @@ END
 //
 
 IDD_KEYBOX AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_RULE AFX_DIALOG_LAYOUT
 BEGIN
     0
 END

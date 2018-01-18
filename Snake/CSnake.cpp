@@ -99,7 +99,8 @@ BOOL Snake::move()
 		snake_list.begin()->x = point.x;
 		snake_list.begin()->y = point.y;
 		generateFood();
-		UINT factor = 10 + 5 * level + 5 * level * level; // refers to header
+		// refers to header
+		UINT factor = 10 + 5 * level + 5 * level * level; 
 		if ((snake_list.size()-3) == factor)
 		{
 			level++;
