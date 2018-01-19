@@ -392,7 +392,7 @@ IDB_LEADER              BITMAP                  "res\\trophy.bmp"
 // Dialog
 //
 
-IDD_KEYBOX DIALOGEX 0, 0, 293, 130
+IDD_KEYBOX DIALOGEX 500, 200, 293, 130
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "DirectionKey"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
@@ -403,16 +403,16 @@ BEGIN
     PUSHBUTTON      "LEFT",IDC_LEFT,39,69,68,38
 END
 
-IDD_RULE DIALOGEX 0, 0, 309, 176
+IDD_RULE DIALOGEX 0, 0, 241, 157
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Game Rule"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    LTEXT           "Game Rule",IDC_RULE,18,18,78,12
-    LTEXT           "1. The snake can be controlled by both keyboard and the button, which refers to the Key tab",IDC_RULE1,18,48,264,18
-    LTEXT           "2. When the snake reaches some point, the game level will increase and then the snake will be accerlated",IDC_RULE2,18,75,264,18
-    LTEXT           "3. The player may pause, continue or stop the game using Game tab",IDC_RULE3,18,102,220,8
-    LTEXT           "4. The player may change the game theme or the game speed",IDC_RULE4,18,119,200,8
+    LTEXT           "Game Rule",IDC_RULE,103,10,35,8
+    LTEXT           "1. The snake can be controlled by both the keyboard and button, which refers to the Key tab.",IDC_RULE1,17,27,208,33
+    LTEXT           "2. When the snake reaches some point, the game level will increase and then the snake will be accelerated.",IDC_RULE2,17,60,208,33
+    LTEXT           "3. The player may pause, continue or stop the game using Game tab.",IDC_RULE3,17,93,208,23
+    LTEXT           "4. The player may change the game theme or the game speed.",IDC_RULE4,17,116,208,23
 END
 
 
@@ -435,9 +435,9 @@ BEGIN
     IDD_RULE, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 302
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 169
+        RIGHTMARGIN, 234
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 150
     END
 END
 #endif    // APSTUDIO_INVOKED

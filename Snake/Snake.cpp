@@ -326,6 +326,8 @@ public:
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+	BOOL OnInitDialog();
+	void OnPaint();
 
 	DECLARE_MESSAGE_MAP()
 };
@@ -341,6 +343,67 @@ CRuleDlg::~CRuleDlg()
 void CRuleDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+}
+
+BOOL CRuleDlg::OnInitDialog()
+{
+	CDialogEx::OnInitDialog();
+	
+	CFont m_big_font, m_small_font;
+	m_big_font.CreateFont(20, 0, 0, 0, 0, 0, 0, 0,
+		DEFAULT_CHARSET, 0, 0, 0, 0, _T("Arial"));
+	m_small_font.CreateFont(10, 0, 0, 0, 0, 0, 0, 0,
+		DEFAULT_CHARSET, 0, 0, 0, 0, _T("Arial"));
+	GetDlgItem(IDC_RULE)->SetFont(&m_big_font);
+	GetDlgItem(IDC_RULE1)->SetFont(&m_small_font);
+	GetDlgItem(IDC_RULE2)->SetFont(&m_small_font);
+	GetDlgItem(IDC_RULE3)->SetFont(&m_small_font);
+	GetDlgItem(IDC_RULE4)->SetFont(&m_small_font);
+	
+	return TRUE;
+}
+
+void CRuleDlg::OnPaint()
+{
+	/*	NOT USED  */
+
+	HWND hwnd = GetSafeHwnd();
+	::InvalidateRect(hwnd, NULL, true);
+	::UpdateWindow(hwnd);
+
+	CDC *pDC = GetDC();
+	CImage image;
+	image.Load(_T("./res/Rule.png"));
+	if (image.IsNull())
+	{
+		return;
+	}
+	if (image.GetBPP() == 32)
+	{
+		int i, j;
+		for (i = 0; i < image.GetWidth(); i++)
+		{
+			for (j = 0; j < image.GetHeight(); j++)
+			{
+				byte *pByte = (byte *)image.GetPixelAddress(i, j);
+				pByte[0] = pByte[0] * pByte[3] / 255;
+				pByte[1] = pByte[1] * pByte[3] / 255;
+				pByte[2] = pByte[2] * pByte[3] / 255;
+			}
+		}
+	}
+	CDC m_cacheDC;
+	CBitmap m_cacheCBitmap;
+	m_cacheDC.CreateCompatibleDC(NULL);
+	m_cacheCBitmap.CreateCompatibleBitmap(pDC, 456, 212);
+	CBitmap *pOldBit = m_cacheDC.SelectObject(&m_cacheCBitmap);
+
+	image.Draw(pDC->m_hDC, 0, 0);
+	image.Draw(m_cacheDC, 0, 0);
+	pDC->BitBlt(0, 0, 456, 212, &m_cacheDC, 0, 0, SRCCOPY);
+	image.Destroy();
+	ReleaseDC(pDC);
+
 }
 
 BEGIN_MESSAGE_MAP(CRuleDlg, CDialogEx)

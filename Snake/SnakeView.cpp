@@ -129,7 +129,7 @@ void CSnakeView::OnDraw(CDC* pDC)
 	{
 		// Information for the user at the beginning
 		SetRect(info_rect,80,200,640,350);
-		info.Format(_T("PLEASE PRESS NEW GAME TO START"));
+		info.Format(_T("PLEASE PRESS NEW GAME TO START\nMore info refers to HELP"));
 		m_cacheDC.SelectObject(m_info_font);
 		//CBrush info_brush(RGB(50, 100, 255));
 		//m_cacheDC.FillRect(info_rect, &info_brush);

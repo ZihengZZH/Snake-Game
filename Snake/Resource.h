@@ -28,10 +28,10 @@
 #define IDC_DOWN                        1012
 #define IDC_LEFT                        1013
 #define IDC_RULE                        1014
-#define IDC_RULE1                       1015
-#define IDC_RULE2                       1016
-#define IDC_RULE3                       1017
-#define IDC_RULE4                       1018
+#define IDC_RULE1                       1019
+#define IDC_RULE2                       1020
+#define IDC_RULE3                       1021
+#define IDC_RULE4                       1022
 #define ID_THEME_DEFAULT                32771
 #define ID_THEME_LIGHT                  32772
 #define ID_THEME_DARK                   32773
@@ -58,7 +58,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        335
 #define _APS_NEXT_COMMAND_VALUE         32800
-#define _APS_NEXT_CONTROL_VALUE         1019
+#define _APS_NEXT_CONTROL_VALUE         1020
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif
