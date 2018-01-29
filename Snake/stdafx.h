@@ -33,6 +33,7 @@
 
 #include <afxcontrolbars.h>     // MFC support for ribbons and control bars
 
+#include <mmsystem.h>			// Necessary for sound
 
 
 

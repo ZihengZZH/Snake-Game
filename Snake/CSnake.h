@@ -21,12 +21,13 @@ class Snake : public CObject
 	DECLARE_SERIAL(Snake);
 
 private:
-	UINT direction; // direction of the snake
-	BOOL is_food; // if the snake eats the food
+	
 
 public:
 	vector<CPoint> snake_list; // snake body
 	vector<CPoint> default_state; // default state
+	UINT direction; // direction of the snake
+	BOOL is_food; // if the snake eats the food	
 	CPoint food; // food
 	UINT speed; // speed of the snake
 	UINT level; // level of the game

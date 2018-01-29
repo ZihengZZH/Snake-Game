@@ -275,7 +275,8 @@ void CSnakeView::OnSTART()
 	m_highest = pDoc->RetrieveHighest();
 	snake.speed = *pDoc->speed_current;
 	m_died = FALSE;
-	
+
+	PlaySound(L"C://Users//Ziheng//Documents//Visual Studio 2017//Projects//MFC_Snake//Snake//res//bgm.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 	SetTimer(1, snake.speed, NULL); // speed depends on nElasp ms 
 	srand(time(NULL));
 	snake.generateFood();
@@ -316,6 +317,11 @@ void CSnakeView::OnTimer(UINT_PTR nIDEvent)
 	if (!pDoc)
 		return;
 
+	if (snake.is_food)
+	{
+		PlaySound(L"C://Users//Ziheng//Documents//Visual Studio 2017//Projects//MFC_Snake//Snake//res//food.wav", NULL, SND_FILENAME | SND_ASYNC);
+	}
+
 	if (snake.level_up)
 	{
 		KillTimer(nIDEvent);
@@ -324,12 +330,13 @@ void CSnakeView::OnTimer(UINT_PTR nIDEvent)
 
 	if (snake.move() != TRUE) 
 	{
+		PlaySound(L"C://Users//Ziheng//Documents//Visual Studio 2017//Projects//MFC_Snake//Snake//res//died.wav", NULL, SND_FILENAME | SND_ASYNC);
 		KillTimer(nIDEvent);
 		m_died = TRUE;
 		pDoc->new_highest = m_score;
 		pDoc->new_level = snake.level;
 		pDoc->UpdateDatabase();
-		AfxMessageBox(_T("YOU DIED, PLEASE START OVER."));
+		//AfxMessageBox(_T("YOU DIED, PLEASE START OVER."));
 	}
 	Invalidate(FALSE);
 
@@ -356,6 +363,7 @@ void CSnakeView::OnGameContinue()
 // Stop the game and kill the timer
 void CSnakeView::OnGameStop()
 {
+	PlaySound(L"C://Users//Ziheng//Documents//Visual Studio 2017//Projects//MFC_Snake//Snake//res//died.wav", NULL, SND_FILENAME | SND_ASYNC);
 	m_pause = FALSE;
 	KillTimer(1);
 
@@ -367,6 +375,6 @@ void CSnakeView::OnGameStop()
 	pDoc->new_highest = m_score;
 	pDoc->UpdateDatabase();
 
-	AfxMessageBox(_T("GAME STOPPED, PLEASE START OVER."));
+	//AfxMessageBox(_T("GAME STOPPED, PLEASE START OVER."));
 }
 

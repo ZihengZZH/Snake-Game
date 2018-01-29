@@ -89,6 +89,7 @@ BOOL Snake::move()
 	// EAT the food
 	if (point == food)
 	{
+		is_food = TRUE;
 		snake_list.push_back(*(snake_list.end() - 1));
 		for (vector<CPoint>::iterator iter = snake_list.end() - 2;
 			iter != snake_list.begin(); iter--)
@@ -110,6 +111,7 @@ BOOL Snake::move()
 	// MISS the food
 	else
 	{
+		is_food = FALSE;
 		for (vector<CPoint>::iterator iter = snake_list.end() - 1;
 			iter != snake_list.begin(); iter--)
 		{
