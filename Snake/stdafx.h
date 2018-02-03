@@ -34,8 +34,9 @@
 #include <afxcontrolbars.h>     // MFC support for ribbons and control bars
 
 #include <mmsystem.h>			// Necessary for sound
+//#pragma comment(lib, "WINMM.LIB")
 
-
+#include <Vfw.h>
 
 
 

@@ -54,6 +54,7 @@ public:
 	CFont m_info_font; // new font for information
 	BOOL m_pause; // if the game is paused
 	BOOL m_died; // if the snake the died
+	HWND hMCI;
 
 // Operations
 public:
