@@ -13,8 +13,7 @@
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
+Snake/Release
 x64/
 x86/
 bld/
