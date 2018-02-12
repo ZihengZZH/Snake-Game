@@ -141,7 +141,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     LTEXT           "MFC Game - Snake",IDC_STATIC,88,22,64,8,SS_NOPREFIX
     LTEXT           "Copyright (C) 2017.  All Rights Reserved.",IDC_STATIC,88,48,138,8
-    LTEXT           "Version 1.2",IDC_STATIC,88,35,37,8
+    LTEXT           "Version 1.5",IDC_STATIC,88,35,37,8
     LTEXT           "Author: Ziheng ZHANG",IDC_STATIC,88,80,74,8
     LTEXT           "University ID: 201220030",IDC_STATIC,88,94,83,8
     LTEXT           "Github:",IDC_STATIC,88,108,24,8
