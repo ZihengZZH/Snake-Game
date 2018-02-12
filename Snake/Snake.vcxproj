@@ -145,6 +145,7 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>Vfw32.lib</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -218,6 +219,7 @@
     <None Include="res\Snake.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\apple.png" />
     <Image Include="res\background.bmp" />
     <Image Include="res\background.png" />
     <Image Include="res\background_dark.bmp" />
@@ -232,9 +234,16 @@
     <Image Include="res\Splash.bmp" />
     <Image Include="res\Toolbar.bmp" />
     <Image Include="res\trophy.bmp" />
+    <Image Include="res\trophy.png" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="database.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="res\bgm.mp3" />
+    <Media Include="res\bgm.wav" />
+    <Media Include="res\died.wav" />
+    <Media Include="res\food.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

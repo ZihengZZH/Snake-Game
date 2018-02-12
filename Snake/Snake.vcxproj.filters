@@ -125,10 +125,30 @@
     <Image Include="res\trophy.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="res\apple.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\trophy.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="database.xml">
       <Filter>Database</Filter>
     </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="res\bgm.mp3">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="res\bgm.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="res\died.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="res\food.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
   </ItemGroup>
 </Project>

@@ -54,8 +54,8 @@ BOOL CSnakeView::PreCreateWindow(CREATESTRUCT& cs)
 	m_bg_light.LoadBitmap(IDB_BG_LIGHT);
 	m_bg_dark.LoadBitmap(IDB_BG_DARK);
 	// Absolute path
-	m_food.Load(_T(".\\res\\apple.png"));
-	m_trophy.Load(_T(".\\res\\trophy.png"));
+	m_food.Load(_T("..\\Snake\\res\\apple.png"));
+	m_trophy.Load(_T("..\\Snake\\res\\trophy.png"));
 
 	// Set the font for score display
 	m_font.CreatePointFont(180, L"Century Gothic"); // Small Fonts
@@ -276,7 +276,7 @@ void CSnakeView::OnSTART()
 	snake.speed = *pDoc->speed_current;
 	m_died = FALSE;
 
-	CString bgm = _T(".\\res\\bgm.wav");
+	CString bgm = _T("..\\Snake\\res\\bgm.wav");
 	hMCI = MCIWndCreate(NULL, NULL, WS_POPUP | MCIWNDF_NOPLAYBAR | MCIWNDF_NOMENU, bgm);
 	MCIWndPlay(hMCI);
 	//PlaySound(L".\\res\\bgm.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
@@ -323,7 +323,7 @@ void CSnakeView::OnTimer(UINT_PTR nIDEvent)
 
 	if (snake.is_food)
 	{
-		PlaySound(L".\\res\\food.wav", NULL, SND_FILENAME | SND_ASYNC);
+		PlaySound(L"..\\Snake\\res\\food.wav", NULL, SND_FILENAME | SND_ASYNC);
 		//mciSendString(_T("open res\\food.wav alias aa"), NULL, 0, NULL);
 	}
 
@@ -336,7 +336,7 @@ void CSnakeView::OnTimer(UINT_PTR nIDEvent)
 	if (snake.move() != TRUE) 
 	{
 		MCIWndDestroy(hMCI);
-		PlaySound(L".\\res\\died.wav", NULL, SND_FILENAME | SND_ASYNC);
+		PlaySound(L"..\\Snake\\res\\died.wav", NULL, SND_FILENAME | SND_ASYNC);
 		//mciSendString(_T("open res\\died.wav alias aa"), NULL, 0, NULL);
 
 		KillTimer(nIDEvent);
@@ -372,7 +372,7 @@ void CSnakeView::OnGameContinue()
 void CSnakeView::OnGameStop()
 {
 	MCIWndDestroy(hMCI);
-	PlaySound(L".\\res\\died.wav", NULL, SND_FILENAME | SND_ASYNC);
+	PlaySound(L"..\\Snake\\res\\died.wav", NULL, SND_FILENAME | SND_ASYNC);
 	m_pause = FALSE;
 	KillTimer(1);
 
