@@ -2,20 +2,20 @@
 <record>
 	<highest id="low">
 		<level>low</level>
-		<score>17</score>
+		<score>10</score>
 		<level>1</level>
 		<time>2018/02/12 22:02:43.347</time>
 	</highest>
 	<highest id="default">
 		<level>default</level>
-		<score>12</score>
+		<score>10</score>
 		<level>1</level>
-		<time>2018/01/18 19:42:12.550</time>
+		<time>2018/02/13 15:48:36.000</time>
 	</highest>
 	<highest id="high">
 		<level>high</level>
-		<score>28</score>
-		<level>0</level>
-		<time>2018/01/16 21:24:52.021</time>
+		<score>10</score>
+		<level>1</level>
+		<time>2018/02/17 17:06:16.410</time>
 	</highest>
 </record>
