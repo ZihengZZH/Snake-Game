@@ -14,19 +14,33 @@ However, the communication with XML files might be problematic and so is playing
 -----
 
 ## Screenshots
-![image](https://github.com/ZihengZZH/Snake-Game/tree/master/Snake/res/Splash.bmp)
+![image](https://raw.githubusercontent.com/ZihengZZH/Snake-Game/master/Snake/res/Splash.bmp)
 
-![image](https://github.com/ZihengZZH/Snake-Game/tree/master/test_img/01.PNG)
+Splash of the game
 
-![image](https://github.com/ZihengZZH/Snake-Game/tree/master/test_img/02.PNG)
+![image](https://raw.githubusercontent.com/ZihengZZH/Snake-Game/master/test_img/01.PNG)
 
-![image](https://github.com/ZihengZZH/Snake-Game/tree/master/test_img/03.PNG)
+Beginning view
 
-![image](https://github.com/ZihengZZH/Snake-Game/tree/master/test_img/04.PNG)
+![image](https://raw.githubusercontent.com/ZihengZZH/Snake-Game/master/test_img/02.PNG)
 
-![image](https://github.com/ZihengZZH/Snake-Game/tree/master/test_img/05.PNG)
+Game running (Default theme)
 
-![image](https://github.com/ZihengZZH/Snake-Game/tree/master/test_img/06.PNG)
+![image](https://raw.githubusercontent.com/ZihengZZH/Snake-Game/master/test_img/03.PNG)
+
+Game running (Light theme)
+
+![image](https://raw.githubusercontent.com/ZihengZZH/Snake-Game/master/test_img/04.PNG)
+
+Game running (Dark theme)
+
+![image](https://raw.githubusercontent.com/ZihengZZH/Snake-Game/master/test_img/06.PNG)
+
+Control button
+
+![image](https://raw.githubusercontent.com/ZihengZZH/Snake-Game/master/test_img/05.PNG)
+
+About dialog
 
 -----
 
