@@ -14,19 +14,19 @@ However, the communication with XML files might be problematic and so is playing
 -----
 
 ## Screenshots
-![image](Snake-Game/Snake/res/Splash.bmp)
+![image](https://github.com/ZihengZZH/Snake-Game/tree/master/Snake/res/Splash.bmp)
 
-![image](Snake-Game/test_img/01.PNG)
+![image](https://github.com/ZihengZZH/Snake-Game/tree/master/test_img/01.PNG)
 
-![image](Snake-Game/test_img/02.PNG)
+![image](https://github.com/ZihengZZH/Snake-Game/tree/master/test_img/02.PNG)
 
-![image](Snake-Game/test_img/03.PNG)
+![image](https://github.com/ZihengZZH/Snake-Game/tree/master/test_img/03.PNG)
 
-![image](Snake-Game/test_img/04.PNG)
+![image](https://github.com/ZihengZZH/Snake-Game/tree/master/test_img/04.PNG)
 
-![image](Snake-Game/test_img/05.PNG)
+![image](https://github.com/ZihengZZH/Snake-Game/tree/master/test_img/05.PNG)
 
-![image](Snake-Game/test_img/06.PNG)
+![image](https://github.com/ZihengZZH/Snake-Game/tree/master/test_img/06.PNG)
 
 -----
 
